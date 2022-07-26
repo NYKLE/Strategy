@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ResourceZone : MonoBehaviour, ISelectable
 {
-    [SerializeField] private ResourceType _resourceType;
+    [SerializeField] private ResourceZoneType _resourceZoneType;
 
     [Header("UI")] 
     [SerializeField] private TMP_Text _zoneNameText;
@@ -40,7 +40,7 @@ public class ResourceZone : MonoBehaviour, ISelectable
 
     private void UpdateWindowData()
     {
-        _zoneNameText.text = _resourceType.ToString();
+        _zoneNameText.text = _resourceZoneType.ToString();
         _workersAmountText.text = _workers.Count.ToString();
 
         // Clear
