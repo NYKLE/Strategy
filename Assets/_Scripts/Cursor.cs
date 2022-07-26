@@ -1,18 +1,35 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Cursor : MonoBehaviour
 {
+    [SerializeField] private GraphicRaycaster _graphicRaycaster;
+    [SerializeField] private EventSystem _eventSystem;
+
+    private PointerEventData _pointerEventData;
     private RaycastHit _raycastHit;
+    private List<RaycastResult> _results;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit))
+            _pointerEventData = new PointerEventData(_eventSystem);
+            _pointerEventData.position = Input.mousePosition;
+
+            _results = new List<RaycastResult>();
+            _graphicRaycaster.Raycast(_pointerEventData, _results);
+
+            if (_results.Count == 0)
             {
-                if (_raycastHit.transform.TryGetComponent(out ISelectable selectable))
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit))
                 {
-                    selectable.OnSelect();
+                    if (_raycastHit.transform.TryGetComponent(out ISelectable selectable))
+                    {
+                        selectable.OnSelect();
+                    }
                 }
             }
         }

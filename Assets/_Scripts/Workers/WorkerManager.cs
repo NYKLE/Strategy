@@ -17,6 +17,7 @@ public class WorkerManager : MonoBehaviour
 
     private List<Worker> _workers;
     private List<Worker> _freeWorkers;
+    private List<Worker> _walkingWorkers;
     private ObjectPool<GameObject> _workerPool;
 
     private void Awake()
@@ -30,15 +31,16 @@ public class WorkerManager : MonoBehaviour
             Destroy(this);
         }
 
-        _workers = new List<Worker>(10);
-        _freeWorkers = new List<Worker>(10);
+        _workers = new List<Worker>(_maximumAmount);
+        _freeWorkers = new List<Worker>(_maximumAmount);
+        _walkingWorkers = new List<Worker>(_maximumAmount);
 
         PoolSetup();
     }
 
     public void Start()
     {
-        SpawnWorker(10);
+        SpawnWorker(_maximumAmount);
     }
 
     public void SpawnWorker(int amount)
@@ -47,6 +49,31 @@ public class WorkerManager : MonoBehaviour
         {
             _workerPool.Get();
         }
+    }
+
+    public GameObject SpawnSingleWorker()
+    {
+        return _workerPool.Get();
+    }
+
+    public List<Worker> GetWorkers()
+    {
+        return _workers;
+    }
+
+    public List<Worker> CheckForWalkingWorkers()
+    {
+        _walkingWorkers.Clear();
+
+        foreach (var worker in _workers)
+        {
+            if (worker.GetState() == WorkerState.Walking)
+            {
+                _walkingWorkers.Add(worker);
+            }
+        }
+
+        return _walkingWorkers;
     }
 
     public List<Worker> CheckForFreeWorkers()
@@ -92,14 +119,27 @@ public class WorkerManager : MonoBehaviour
     private void OnWorkerRelease(GameObject go)
     {
         go.SetActive(false);
-
-        _workers.Remove(go.GetComponent<Worker>());
     }
 
     private void OnWorkerDestroy(GameObject go)
     {
         _workers.Remove(go.GetComponent<Worker>());
 
-        Destroy(go.gameObject);
+        Destroy(go);
+    }
+
+    private void OnEnable()
+    {
+        Worker.OnReleaseWorker += OnReleaseWorker;
+    }
+
+    private void OnDisable()
+    {
+        Worker.OnReleaseWorker -= OnReleaseWorker;
+    }
+
+    private void OnReleaseWorker(GameObject go)
+    {
+        _workerPool.Release(go);
     }
 }

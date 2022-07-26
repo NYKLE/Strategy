@@ -2,5 +2,6 @@ public enum WorkerState
 {
     Free,
     Walking,
-    Working
+    Working,
+    Returning
 }
