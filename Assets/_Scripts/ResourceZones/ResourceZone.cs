@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,103 +5,55 @@ using UnityEngine.UI;
 public class ResourceZone : MonoBehaviour, ISelectable
 {
     [SerializeField] private ResourceZoneType _resourceZoneType;
+    [field: SerializeField] public int Wealth { get; private set; }
 
     [Header("Enter / Exit Point")] 
     [SerializeField] private Transform _enterExitPoint;
 
-    [Header("UI")] 
-    [SerializeField] private TMP_Text _zoneNameText;
-    [SerializeField] private TMP_Text _workersAmountText;
-    [Space]
-    [SerializeField] private Sprite _emptySlotSprite;
-    [SerializeField] private Sprite _walkingSlotSprite;
-    [SerializeField] private Sprite _activeSlotSprite;
-    [SerializeField] private Sprite _returningSlotSprite;
-    [Space]
+    [Header("Selection FX")] 
+    [SerializeField] private SpriteRenderer _selectedSprite;
+
+    [Header("UI")]
+    [SerializeField] private int _workersMaxAmount;
+
     [SerializeField] private Canvas _canvas;
-    [SerializeField] private Image[] _images;
+    [SerializeField] private Slider _slider;
+    [SerializeField] private TMP_Text _sliderCurrentText;
 
-    [SerializeField] private ResourceZoneAddOrReleaseWorkerButton[] _buttons;
-
-    private List<Worker> _workers;
-
-    private void Awake()
-    {
-        _workers = new List<Worker>(10);
-    }
+    private int _workersCurrentAmount;
 
     public void OnSelect()
     {
-        UpdateWindowData();
+        UpdateData();
 
+        _selectedSprite.enabled = true;
         _canvas.enabled = true;
     }
 
-    public void UpdateWindowData()
+    private void UpdateData()
     {
-        _workers.Clear();
-
-        for (int i = 0; i < WorkerManager.Instance.GetWorkers().Count; i++)
-        {
-            if (WorkerManager.Instance.GetWorkers()[i].GetResourceZone() == this)
-            {
-                _workers.Add(WorkerManager.Instance.GetWorkers()[i]);
-            }
-        }
-
-        _zoneNameText.text = _resourceZoneType.ToString();
-        _workersAmountText.text = _workers.Count.ToString();
-
-        for (int i = 0; i < _images.Length; i++)
-        {
-            _images[i].sprite = _emptySlotSprite;
-        }
-
-        for (int i = 0; i < _buttons.Length; i++)
-        {
-            _buttons[i].SetZone(this);
-        }
-
-        for (int i = 0; i < _workers.Count; i++)
-        {
-            switch (_workers[i].GetState())
-            {
-                case WorkerState.Free:
-                    _images[i].sprite = _emptySlotSprite;
-                    break;
-                case WorkerState.Walking:
-                    _images[i].sprite = _walkingSlotSprite;
-                    break;
-                case WorkerState.Working:
-                    _images[i].sprite = _activeSlotSprite;
-                    break;
-                case WorkerState.Returning:
-                    _images[i].sprite = _returningSlotSprite;
-                    break;
-
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
+        _slider.maxValue = _workersMaxAmount;
     }
 
-    public List<Worker> GetWorkers()
+    // Used in Inspector
+    public void OnSliderValueChanged()
     {
-        return _workers;
+        _sliderCurrentText.text = _slider.value.ToString();
     }
 
-    public void RemoveWorker(Worker worker)
+    public void OnEnable()
     {
-        _workers.Remove(worker);
+        Cursor.onDeselect += OnDeselect;
     }
 
-    public Vector3 GetEnterExitPoint()
+    public void OnDisable()
     {
-        return _enterExitPoint.position;
+        Cursor.onDeselect -= OnDeselect;
     }
 
-    public void MoveToPos(RaycastHit hit)
+    private void OnDeselect()
     {
-        throw new System.NotImplementedException();
+        _canvas.enabled = false;
+        _selectedSprite.enabled = false;
     }
 }

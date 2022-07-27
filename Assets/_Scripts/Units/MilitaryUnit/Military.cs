@@ -2,9 +2,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using Unity;
 [RequireComponent(typeof(NavMeshAgent))]
-public class Millitary : MonoBehaviour, ISelectable
+public class Military : MonoBehaviour, ISelectable, IMoveable
 {
     [SerializeField] private MillitaryState _state;
+
+    [SerializeField] private SpriteRenderer _selectedSprite;
 
     private NavMeshAgent _agent;
     private RaycastHit hit;
@@ -14,9 +16,11 @@ public class Millitary : MonoBehaviour, ISelectable
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+
+        UnitsManager.onUnitSpawn?.Invoke(gameObject);
     }
 
-    public void SendMillitary(Vector3 destination)
+    public void SendMilitary(Vector3 destination)
     {
         _isReachedDestination = false;
 
@@ -49,11 +53,30 @@ public class Millitary : MonoBehaviour, ISelectable
 
     public void OnSelect()
     {
-        
+        _selectedSprite.enabled = true;
     }
 
     public void MoveToPos(RaycastHit _hit)
     {
         hit.point = _hit.point;
+    }
+
+    public void OnEnable()
+    {
+        
+
+        Cursor.onDeselect += OnDeselect;
+    }
+
+    public void OnDisable()
+    {
+        UnitsManager.onUnitDeath?.Invoke(gameObject);
+
+        Cursor.onDeselect -= OnDeselect;
+    }
+
+    private void OnDeselect()
+    {
+        _selectedSprite.enabled = false;
     }
 }

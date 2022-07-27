@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -36,7 +35,6 @@ public class Worker : MonoBehaviour, ISelectable
         _isReachedDestination = false;
 
         gameObject.SetActive(true);
-        gameObject.transform.position = zone.GetEnterExitPoint();
 
         _agent.SetDestination(ratusha);
 
@@ -70,8 +68,6 @@ public class Worker : MonoBehaviour, ISelectable
                     {
                         SetState(WorkerState.Free);
 
-                        _zone.RemoveWorker(this);
-                        _zone.UpdateWindowData();
                         _zone = null;
 
                         _isReturning = false;
@@ -94,7 +90,6 @@ public class Worker : MonoBehaviour, ISelectable
                     if (_isReachedDestination == false)
                     {
                         SetState(WorkerState.Working);
-                        _zone.UpdateWindowData();
 
                         gameObject.SetActive(false);
 

@@ -1,61 +1,129 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class Cursor : MonoBehaviour
 {
-    [SerializeField] private GraphicRaycaster _graphicRaycaster;
-    [SerializeField] private EventSystem _eventSystem;
+    public static Action onDeselect;
 
-    private PointerEventData _pointerEventData;
+    private List<IMoveable> _selectedUnits = new List<IMoveable>();
+
     private RaycastHit _raycastHit;
-    private ISelectable curUnit;
-    private List<RaycastResult> _results;
-    Plane PlaneForPick = new Plane(Vector3.up, Vector3.zero);
+    private Vector3 _dragStartPosition;
+
+    private bool _isDraggingMouseBox;
+
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit))
             {
                 if (_raycastHit.transform.TryGetComponent(out ISelectable selectable))
                 {
-                    curUnit = selectable;
+                    //curUnit = selectable;
                     selectable.OnSelect();
                 }
-                else if ((!_raycastHit.transform.TryGetComponent(out ISelectable _selectable)) && curUnit != null)
+                else if ((!_raycastHit.transform.TryGetComponent(out ISelectable _selectable)) && _selectedUnit != null)
                 {
-                    curUnit = null;
+                    _selectedUnit = null;
                 }
             }
         }
         if (Input.GetMouseButtonDown(1))
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit) && curUnit != null)
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit) && _selectedUnit != null)
             {
-                curUnit.MoveToPos(_raycastHit);
-            }
-        }
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            _pointerEventData = new PointerEventData(_eventSystem);
-            _pointerEventData.position = Input.mousePosition;
-
-            _results = new List<RaycastResult>();
-            _graphicRaycaster.Raycast(_pointerEventData, _results);
-
-            if (_results.Count == 0)
-            {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit))
-                {
-                    if (_raycastHit.transform.TryGetComponent(out ISelectable selectable))
-                    {
-                        selectable.OnSelect();
-                    }
-                }
+                _selectedUnit.MoveToPos(_raycastHit);
             }
         }*/
+
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                _isDraggingMouseBox = true;
+                _dragStartPosition = Input.mousePosition;
+
+                if (_raycastHit.transform.TryGetComponent(out ISelectable selectable))
+                {
+                    onDeselect?.Invoke();
+                    selectable.OnSelect();
+                }
+                else
+                {
+                    onDeselect?.Invoke();
+                }
+
+                _selectedUnits.Clear();
+                if (_raycastHit.transform.TryGetComponent(out IMoveable moveable))
+                {
+                    _selectedUnits.Add(moveable);
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            _isDraggingMouseBox = false;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit) && _selectedUnits.Count > 0)
+            {
+                for (int i = 0; i < _selectedUnits.Count; i++)
+                {
+                    _selectedUnits[i].MoveToPos(_raycastHit);
+                }
+            }
+        }
+
+        if (_isDraggingMouseBox && _dragStartPosition != Input.mousePosition)
+        {
+            SelectUnitsInDraggingBox();
+        }
+    }
+
+    private void SelectUnitsInDraggingBox()
+    {
+        Bounds selectionBounds = SelectionBoxUI.GetViewportBounds(Camera.main, _dragStartPosition, Input.mousePosition);
+        //_selectedUnits.Clear();
+
+        foreach (GameObject unit in UnitsManager.Instance.GetUnitsList())
+        {
+            bool inBounds = selectionBounds.Contains(Camera.main.WorldToViewportPoint(unit.transform.position));
+            if (inBounds)
+            {
+                if (unit.TryGetComponent(out ISelectable selectable))
+                {
+                    //onDeselect?.Invoke();
+                    selectable.OnSelect();
+                }
+
+                if (unit.TryGetComponent(out IMoveable moveable))
+                {
+                    _selectedUnits.Add(moveable);
+                }
+            }
+            else
+            {
+                //onDeselect?.Invoke();
+            }
+        }
+    }
+
+    private void OnGUI()
+    {
+        if (_isDraggingMouseBox)
+        {
+            var rect = SelectionBoxUI.GetScreenRect(_dragStartPosition, Input.mousePosition);
+            SelectionBoxUI.DrawScreenRect(rect, new Color(0.5f, 1f, 0.4f, 0.2f));
+            SelectionBoxUI.DrawScreenRectBorder(rect, 1, new Color(0.5f, 1f, 0.4f));
+        }
     }
 }
     

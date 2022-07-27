@@ -1,7 +1,8 @@
 public enum ResourceZoneType
 {
-    Field,
-    Ore,
-    Forest,
-    Water
+    Contentment,
+    Stone,
+    Iron,
+    Gold,
+    Wood
 }
