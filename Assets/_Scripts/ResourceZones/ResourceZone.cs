@@ -58,4 +58,9 @@ public class ResourceZone : MonoBehaviour, ISelectable
             _buttons[i].SetOccupied(true);
         }
     }
+
+    public void MoveToPos(RaycastHit hit)
+    {
+        throw new System.NotImplementedException();
+    }
 }

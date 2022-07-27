@@ -2,5 +2,13 @@ public enum WorkerState
 {
     Free,
     Walking,
-    Working
+    Working,
+    Waiting
+}
+public enum MillitaryState
+{
+    Free,
+    Walking,
+    Attac,
+    Waiting
 }
