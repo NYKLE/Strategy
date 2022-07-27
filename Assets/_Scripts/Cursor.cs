@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Cursor : MonoBehaviour
 {
-    public static Action onDeselect;
-
     private List<IMoveable> _selectedUnits = new List<IMoveable>();
 
     private RaycastHit _raycastHit;
@@ -50,12 +47,12 @@ public class Cursor : MonoBehaviour
 
                 if (_raycastHit.transform.TryGetComponent(out ISelectable selectable))
                 {
-                    onDeselect?.Invoke();
+                    Events.Cursor.onDeselect?.Invoke();
                     selectable.OnSelect();
                 }
                 else
                 {
-                    onDeselect?.Invoke();
+                    Events.Cursor.onDeselect?.Invoke();
                 }
 
                 _selectedUnits.Clear();
@@ -91,7 +88,6 @@ public class Cursor : MonoBehaviour
     private void SelectUnitsInDraggingBox()
     {
         Bounds selectionBounds = SelectionBoxUI.GetViewportBounds(Camera.main, _dragStartPosition, Input.mousePosition);
-        //_selectedUnits.Clear();
 
         foreach (GameObject unit in UnitsManager.Instance.GetUnitsList())
         {
@@ -100,7 +96,6 @@ public class Cursor : MonoBehaviour
             {
                 if (unit.TryGetComponent(out ISelectable selectable))
                 {
-                    //onDeselect?.Invoke();
                     selectable.OnSelect();
                 }
 
@@ -108,10 +103,6 @@ public class Cursor : MonoBehaviour
                 {
                     _selectedUnits.Add(moveable);
                 }
-            }
-            else
-            {
-                //onDeselect?.Invoke();
             }
         }
     }

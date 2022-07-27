@@ -43,12 +43,12 @@ public class ResourceZone : MonoBehaviour, ISelectable
 
     public void OnEnable()
     {
-        Cursor.onDeselect += OnDeselect;
+        Events.Cursor.onDeselect += OnDeselect;
     }
 
     public void OnDisable()
     {
-        Cursor.onDeselect -= OnDeselect;
+        Events.Cursor.onDeselect -= OnDeselect;
     }
 
     private void OnDeselect()

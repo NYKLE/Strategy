@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Unity;
+
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class Military : MonoBehaviour, ISelectable, IMoveable
 {
@@ -16,8 +17,11 @@ public class Military : MonoBehaviour, ISelectable, IMoveable
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+    }
 
-        UnitsManager.onUnitSpawn?.Invoke(gameObject);
+    private void Start()
+    {
+        Events.Unit.onUnitSpawn?.Invoke(gameObject);
     }
 
     public void SendMilitary(Vector3 destination)
@@ -63,16 +67,14 @@ public class Military : MonoBehaviour, ISelectable, IMoveable
 
     public void OnEnable()
     {
-        
-
-        Cursor.onDeselect += OnDeselect;
+        Events.Cursor.onDeselect += OnDeselect;
     }
 
     public void OnDisable()
     {
-        UnitsManager.onUnitDeath?.Invoke(gameObject);
+        Events.Unit.onUnitDeath?.Invoke(gameObject);
 
-        Cursor.onDeselect -= OnDeselect;
+        Events.Cursor.onDeselect -= OnDeselect;
     }
 
     private void OnDeselect()

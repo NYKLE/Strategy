@@ -6,9 +6,6 @@ public class UnitsManager : MonoBehaviour
 {
     public static UnitsManager Instance; 
 
-    public static Action<GameObject> onUnitSpawn;
-    public static Action<GameObject> onUnitDeath;
-
     private List<GameObject> _units = new List<GameObject>(100);
 
     private void Awake()
@@ -35,14 +32,14 @@ public class UnitsManager : MonoBehaviour
 
     private void OnEnable()
     {
-        onUnitSpawn += OnAdd;
-        onUnitDeath += OnDeath;
+        Events.Unit.onUnitSpawn += OnAdd;
+        Events.Unit.onUnitDeath += OnDeath;
     }
 
     private void OnDisable()
     {
-        onUnitSpawn -= OnAdd;
-        onUnitDeath -= OnDeath;
+        Events.Unit.onUnitSpawn -= OnAdd;
+        Events.Unit.onUnitDeath -= OnDeath;
     }
 
     public List<GameObject> GetUnitsList()
