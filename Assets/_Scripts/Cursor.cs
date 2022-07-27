@@ -37,10 +37,7 @@ public class Cursor : MonoBehaviour
                 curUnit.MoveToPos(_raycastHit);
             }
         }
-    }
-
-}
-if (Input.GetMouseButtonDown(0))
+        /*if (Input.GetMouseButtonDown(0))
         {
             _pointerEventData = new PointerEventData(_eventSystem);
             _pointerEventData.position = Input.mousePosition;
@@ -58,6 +55,10 @@ if (Input.GetMouseButtonDown(0))
                     }
                 }
             }
-        }
+        }*/
     }
 }
+    
+
+
+

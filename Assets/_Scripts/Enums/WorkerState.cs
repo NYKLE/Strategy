@@ -3,8 +3,7 @@ public enum WorkerState
     Free,
     Walking,
     Working,
-    Waiting
-    Working,
+    Waiting,
     Returning
 }
 public enum MillitaryState
