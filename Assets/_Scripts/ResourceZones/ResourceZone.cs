@@ -101,4 +101,9 @@ public class ResourceZone : MonoBehaviour, ISelectable
     {
         return _enterExitPoint.position;
     }
+
+    public void MoveToPos(RaycastHit hit)
+    {
+        throw new System.NotImplementedException();
+    }
 }

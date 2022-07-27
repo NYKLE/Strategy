@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class MainResource
 {
     private  float Gold;
@@ -9,6 +9,8 @@ public class MainResource
     private  float Food;
     private  float Contentment;
 
+    public static event Action<MainResourceType, float> AddRes;
+    public static event Action<MainResourceType, float> LoseRes;
     public void AddResource(MainResourceType type, float count)
     {
 
@@ -29,28 +31,28 @@ public class MainResource
         }
         Debug.Log("count = " + count + "type = " + type);
     }
-    public float LoseResourse(MainResourceType type, float count)
+    public void LoseResourse(MainResourceType type, float count)
     {
         switch (type)
         {
             case MainResourceType.Gold:
                 if (Gold < count) Gold = 0;
                 else Gold -= count;
-                return Gold;
+                break;
             case MainResourceType.Food:
                 if (Food < count) Food = 0;
                 else Food -= count;
-                return  Food;
+                break;
             case MainResourceType.Population:
                 if (Population < count) Population = 0;
                 else Population -= count;
-                return Population;
+                break;
             case MainResourceType.Contentment:
                 if (Contentment < count) Contentment = 0;
                 else Contentment -= count;
-                return Contentment;
+                break;
             default:
-                return 0;
+                break;
         }
          Debug.Log("count = " + count + "type = " + type);
     }

@@ -8,26 +8,47 @@ public class InitializerLinkHolder : MonoBehaviour
     public FossilResourse _fossilResourse { get; private set; }
     public MilitaryResource _militaryResource { get; private set; }
 
-
-    private static InitializerLinkHolder instance;
-
-    public static InitializerLinkHolder getInstance()
-    {
-       return instance;
-    }
     void Start()
     {
-        if (instance == null)
-            instance = this;
-
-       Initialized();
+       
     }
-
+    private void OnEnable()
+    {
+        Initialized();
+        Subscribe();
+    }
+    private void OnDisable()
+    {
+        UnSubscribe();
+    }
     private void Initialized()
     {
        _mainResourses = new MainResource();
         _fossilResourse = new FossilResourse();
         _militaryResource = new MilitaryResource();
     }
-   
+
+    private void Subscribe()
+    {
+        MainResource.AddRes += _mainResourses.AddResource;
+        MainResource.LoseRes += _mainResourses.LoseResourse;
+
+        FossilResourse.AddRes += _fossilResourse.AddResource;
+        FossilResourse.LoseRes += _fossilResourse.LoseResourse;
+
+        MilitaryResource.AddRes += _militaryResource.AddResource;
+        MilitaryResource.LoseRes += _militaryResource.LoseResourse;
+    }
+    private void UnSubscribe()
+    {
+        MainResource.AddRes -= _mainResourses.AddResource;
+        MainResource.LoseRes -= _mainResourses.LoseResourse;
+
+        FossilResourse.AddRes -= _fossilResourse.AddResource;
+        FossilResourse.LoseRes -= _fossilResourse.LoseResourse;
+
+        MilitaryResource.AddRes -= _militaryResource.AddResource;
+        MilitaryResource.LoseRes -= _militaryResource.LoseResourse;
+    }
+
 }

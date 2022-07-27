@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Worker : MonoBehaviour
+public class Worker : MonoBehaviour, ISelectable
 {
     public static Action<GameObject> OnReleaseWorker;
 
@@ -12,7 +12,7 @@ public class Worker : MonoBehaviour
 
     private NavMeshAgent _agent;
     private ResourceZone _zone;
-
+    private RaycastHit hit;
     private bool _isReachedDestination;
     private bool _isReturning;
 
@@ -109,5 +109,23 @@ public class Worker : MonoBehaviour
                 }
             }
         }
+        if (hit.point != Vector3.zero)
+        {
+            SetState(WorkerState.Walking);
+            _agent.SetDestination(hit.point);
+        }
+        else
+        {
+            SetState(WorkerState.Waiting);
+        }
+    }
+    public void MoveToPos(RaycastHit _hit)
+    {
+        hit.point = _hit.point;
+    }
+
+    public void OnSelect()
+    {
+     //   throw new System.NotImplementedException();
     }
 }
