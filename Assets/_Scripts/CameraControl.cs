@@ -3,106 +3,73 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour
 {
-	[SerializeField]
-	private float speed = 5;
-	[SerializeField]
-	private KeyCode left = KeyCode.A;
-	[SerializeField]
-	private KeyCode right = KeyCode.D;
-	[SerializeField]
-	private KeyCode up = KeyCode.W;
-	[SerializeField]
-	private KeyCode down = KeyCode.S;
-	[SerializeField]
-	private KeyCode rotCamA = KeyCode.Q;
-	[SerializeField]
-	private KeyCode rotCamB = KeyCode.E;
-	[SerializeField]
-	private Transform startPoint;
-	[SerializeField]
-	private int rotationX = 70;
-	[SerializeField]
-	private float maxHeight = 15;
-	[SerializeField]
-	private float minHeight = 5;
-	[SerializeField]
-	private int rotationLimit = 240;
+	[SerializeField] private int speed;
+	[SerializeField] private int minHight;
+	[SerializeField] private int maxHight;
+	[SerializeField] private int scrollSpeed;
+	[SerializeField] private int panBorderThicknes;
+	[SerializeField] private Vector2 limitPan;
+	[SerializeField] private Camera cameraMain;
 
-	private float camRotation;
-	private float height;
-	private float tmpHeight;
-	private float h, v;
-	private bool L, R, U, D;
+	[SerializeField] private Vector3 originPos;
+	[SerializeField] private Vector3 offset;
 
-	void Start()
-	{
-		height = (maxHeight + minHeight) / 2;
-		tmpHeight = height;
-		camRotation = rotationLimit / 2;
-		transform.position = new Vector3(startPoint.position.x, height, startPoint.position.z);
+	private int speedMultiplay = 100;
+	private bool drag = false;
+    private void Update()
+    {
+		MoveController();
+		DragAndDropCameraMove();
 	}
-
-	public void CursorTriggerEnter(string triggerName)
+    private void MoveController()
 	{
-		switch (triggerName)
+		Vector3 pos = cameraMain.transform.position;
+		if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThicknes)
+        {
+			pos.z += speed * Time.deltaTime;
+        }
+		if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThicknes)
 		{
-			case "L":
-				L = true;
-				break;
-			case "R":
-				R = true;
-				break;
-			case "U":
-				U = true;
-				break;
-			case "D":
-				D = true;
-				break;
+			pos.z -= speed * Time.deltaTime;
 		}
-	}
-
-	public void CursorTriggerExit(string triggerName)
-	{
-		switch (triggerName)
+		if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThicknes)
 		{
-			case "L":
-				L = false;
-				break;
-			case "R":
-				R = false;
-				break;
-			case "U":
-				U = false;
-				break;
-			case "D":
-				D = false;
-				break;
+			pos.x += speed * Time.deltaTime;
 		}
-	}
-
-	void Update()
-	{
-		if (Input.GetKey(left) || L) h = -1; else if (Input.GetKey(right) || R) h = 1; else h = 0;
-		if (Input.GetKey(down) || D) v = -1; else if (Input.GetKey(up) || U) v = 1; else v = 0;
-
-		if (Input.GetKey(rotCamB)) camRotation -= 3; else if (Input.GetKey(rotCamA)) camRotation += 3;
-		camRotation = Mathf.Clamp(camRotation, 0, rotationLimit);
-
-		if (Input.GetAxis("Mouse ScrollWheel") > 0)
+		if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThicknes)
 		{
-			if (height < maxHeight) tmpHeight += 1;
-		}
-		if (Input.GetAxis("Mouse ScrollWheel") < 0)
-		{
-			if (height > minHeight) tmpHeight -= 1;
+			pos.x -= speed * Time.deltaTime;
 		}
 
-		tmpHeight = Mathf.Clamp(tmpHeight, minHeight, maxHeight);
-		height = Mathf.Lerp(height, tmpHeight, 3 * Time.deltaTime);
+		float scroll = Input.GetAxis("Mouse ScrollWheel");
+		pos.y -= scroll * scrollSpeed * speedMultiplay * Time.deltaTime;
 
-		Vector3 direction = new Vector3(h, v, 0);
-		transform.Translate(direction * speed * Time.deltaTime);
-		transform.position = new Vector3(transform.position.x, height, transform.position.z);
-		transform.rotation = Quaternion.Euler(rotationX, camRotation, 0);
-	}
+		pos.x = Mathf.Clamp(pos.x, -limitPan.x, limitPan.x);
+		pos.y = Mathf.Clamp(pos.y, minHight, maxHight);
+		pos.z = Mathf.Clamp(pos.z, -limitPan.y, limitPan.y);
+
+		cameraMain.transform.position = pos;
+    }
+
+	private void DragAndDropCameraMove()
+    {
+        if (Input.GetMouseButton(2))
+        {
+			offset = new Vector3(cameraMain.ScreenToViewportPoint(Input.mousePosition).x, cameraMain.transform.position.y, cameraMain.ScreenToViewportPoint(Input.mousePosition).y) - cameraMain.transform.position;
+			if (drag == false)
+            {
+				drag = true;
+				originPos = new Vector3(cameraMain.ScreenToViewportPoint(Input.mousePosition).x, cameraMain.transform.position.y, cameraMain.ScreenToViewportPoint(Input.mousePosition).y);
+			}
+		}
+        else
+        {
+			drag = false;
+        }
+        if (drag)
+        {
+			cameraMain.transform.position = originPos - offset;
+        }
+    }
+
 }
