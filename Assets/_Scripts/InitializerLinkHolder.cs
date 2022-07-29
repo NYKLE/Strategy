@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class InitializerLinkHolder : MonoBehaviour
 {
-    public MainResource _mainResourses { get; private set; }
-    public FossilResourse _fossilResourse { get; private set; }
-    public MilitaryResource _militaryResource { get; private set; }
+    private ResourseGeneric resourses;
 
     void Start()
     {
-       
+        resourses.InitRes();
+         var gold = resourses.GetResource(ResourseType.Gold);
+        resourses.SetResourse(ResourseType.Gold, gold + 1);
+        var armor = resourses.GetResource(ResourseType.Armor);
+        resourses.SetResourse(ResourseType.Armor, armor + 1);
     }
     private void OnEnable()
     {
@@ -23,32 +25,14 @@ public class InitializerLinkHolder : MonoBehaviour
     }
     private void Initialized()
     {
-       _mainResourses = new MainResource();
-        _fossilResourse = new FossilResourse();
-        _militaryResource = new MilitaryResource();
+       resourses = new ResourseGeneric();
     }
 
     private void Subscribe()
     {
-        MainResource.AddRes += _mainResourses.AddResource;
-        MainResource.LoseRes += _mainResourses.LoseResourse;
-
-        FossilResourse.AddRes += _fossilResourse.AddResource;
-        FossilResourse.LoseRes += _fossilResourse.LoseResourse;
-
-        MilitaryResource.AddRes += _militaryResource.AddResource;
-        MilitaryResource.LoseRes += _militaryResource.LoseResourse;
     }
     private void UnSubscribe()
     {
-        MainResource.AddRes -= _mainResourses.AddResource;
-        MainResource.LoseRes -= _mainResourses.LoseResourse;
-
-        FossilResourse.AddRes -= _fossilResourse.AddResource;
-        FossilResourse.LoseRes -= _fossilResourse.LoseResourse;
-
-        MilitaryResource.AddRes -= _militaryResource.AddResource;
-        MilitaryResource.LoseRes -= _militaryResource.LoseResourse;
     }
 
 }
