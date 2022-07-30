@@ -77,7 +77,7 @@ public class Military : MonoBehaviour, ISelectable, IMoveable
         Events.Cursor.onDeselect -= OnDeselect;
     }
 
-    private void OnDeselect()
+    public void OnDeselect()
     {
         _selectedSprite.enabled = false;
     }

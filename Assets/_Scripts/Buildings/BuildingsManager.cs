@@ -1,25 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingsManager : MonoBehaviour
+[System.Serializable]
+public class BuildingsManager
 {
-    public static BuildingsManager Instance;
+    public List<Building> Buildings { get; set; }
 
-    [SerializeField] private TownHall _townHall;
-
-    private void Awake()
+    public BuildingsManager()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        Buildings = new List<Building>();
     }
 
-    public TownHall GetTownHall()
+    public void AddBuilding(Building building)
     {
-        return _townHall;
+        Buildings.Add(building);
     }
 }

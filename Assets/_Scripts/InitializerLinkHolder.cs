@@ -5,6 +5,7 @@ using UnityEngine;
 public class InitializerLinkHolder : MonoBehaviour
 {
     private ResourseGeneric resourses;
+    public BuildingsManager BuildingsManager { get; private set; }
 
     void Start()
     {
@@ -26,6 +27,7 @@ public class InitializerLinkHolder : MonoBehaviour
     private void Initialized()
     {
        resourses = new ResourseGeneric();
+       BuildingsManager = new BuildingsManager();
     }
 
     private void Subscribe()

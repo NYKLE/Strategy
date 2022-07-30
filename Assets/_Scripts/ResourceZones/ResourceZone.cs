@@ -51,7 +51,7 @@ public class ResourceZone : MonoBehaviour, ISelectable
         Events.Cursor.onDeselect -= OnDeselect;
     }
 
-    private void OnDeselect()
+    public void OnDeselect()
     {
         _canvas.enabled = false;
         _selectedSprite.enabled = false;

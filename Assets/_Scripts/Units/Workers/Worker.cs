@@ -123,4 +123,9 @@ public class Worker : MonoBehaviour, ISelectable
     {
      //   throw new System.NotImplementedException();
     }
+
+    public void OnDeselect()
+    {
+        
+    }
 }
