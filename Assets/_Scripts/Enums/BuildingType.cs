@@ -2,5 +2,6 @@
 public enum BuildingType
 {
     TownHall,
-    Farm
+    Farm,
+    NomadsCamp
 }

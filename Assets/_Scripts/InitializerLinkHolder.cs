@@ -10,10 +10,10 @@ public class InitializerLinkHolder : MonoBehaviour
     void Start()
     {
         resourses.InitRes();
-         var gold = resourses.GetResource(ResourseType.Gold);
-        resourses.SetResourse(ResourseType.Gold, gold + 1);
-        var armor = resourses.GetResource(ResourseType.Armor);
-        resourses.SetResourse(ResourseType.Armor, armor + 1);
+         var gold = resourses.GetResource(ResourceType.Gold);
+        resourses.SetResourse(ResourceType.Gold, gold + 1);
+        // var armor = resourses.GetResource(ResourceType.Armor);
+        // resourses.SetResourse(ResourceType.Armor, armor + 1);
     }
     private void OnEnable()
     {

@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 public class ResourseGeneric
 {
-    private Dictionary<ResourseType, int> resourses;
+    private Dictionary<ResourceType, int> resourses;
     
     public void InitRes()
     {
-        resourses = new Dictionary<ResourseType, int>();
-        foreach (var resType in Enum.GetNames(typeof(ResourseType)))
+        resourses = new Dictionary<ResourceType, int>();
+        foreach (var resType in Enum.GetNames(typeof(ResourceType)))
         {
-            resourses.Add((ResourseType)Enum.Parse(typeof(ResourseType), resType), 0);
+            resourses.Add((ResourceType)Enum.Parse(typeof(ResourceType), resType), 0);
         }
     }
-    public int GetResource(ResourseType type)
+    public int GetResource(ResourceType type)
     {
         if (resourses.ContainsKey(type))
         {
@@ -22,7 +22,7 @@ public class ResourseGeneric
         return 0;
     }
 
-    public void SetResourse(ResourseType type, int count)
+    public void SetResourse(ResourceType type, int count)
     {
         if (resourses.ContainsKey(type))
         {
