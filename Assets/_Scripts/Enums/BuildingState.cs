@@ -1,6 +1,6 @@
 public enum BuildingState
 {
-    Destroyed,
+    Full,
     Broken,
-    Full
+    Destroyed
 }

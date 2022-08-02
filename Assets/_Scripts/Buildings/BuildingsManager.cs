@@ -4,15 +4,20 @@ using UnityEngine;
 [System.Serializable]
 public class BuildingsManager
 {
-    public List<Building> Buildings { get; set; }
+    public List<BuildingBase> Buildings { get; set; }
 
     public BuildingsManager()
     {
-        Buildings = new List<Building>();
+        Buildings = new List<BuildingBase>();
     }
 
-    public void AddBuilding(Building building)
+    public void AddBuilding(BuildingBase buildingBase)
     {
-        Buildings.Add(building);
+        Buildings.Add(buildingBase);
+    }
+
+    public void RemoveBuilding(BuildingBase buildingBase)
+    {
+        Buildings.Remove(buildingBase);
     }
 }

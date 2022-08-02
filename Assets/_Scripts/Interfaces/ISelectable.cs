@@ -2,12 +2,12 @@ public interface ISelectable
 {
     void OnSelect();
     void OnDeselect();
-    private void OnEnable()
+    void OnEnable()
     {
         Events.Cursor.onDeselect += OnDeselect;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         Events.Cursor.onDeselect -= OnDeselect;
     }
