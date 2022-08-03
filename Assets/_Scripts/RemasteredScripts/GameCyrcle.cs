@@ -9,6 +9,14 @@ namespace GameInit.GameCyrcleModule
     {
         private readonly Dictionary<CycleMethod, List<ICallable>> _classesToUpdate = new Dictionary<CycleMethod, List<ICallable>>();
 
+       
+        public void Init()
+        {
+            _classesToUpdate[CycleMethod.Update] = new List<ICallable>();
+
+            _classesToUpdate[CycleMethod.LateUpdate] = new List<ICallable>();
+        }
+       
         public void Add(CycleMethod method, ICallable callable)
         {
             if (!_classesToUpdate[method].Contains(callable))

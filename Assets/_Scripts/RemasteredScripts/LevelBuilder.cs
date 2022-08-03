@@ -15,6 +15,7 @@ namespace GameInit.Builders
         private void Awake()
         {
             var GameCyrcle = GetComponent<GameCyrcle>();
+            GameCyrcle.Init();
             CameraBuilder(GameCyrcle);
         }
         private void OnDestroy()

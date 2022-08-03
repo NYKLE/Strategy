@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class BuildingsManager
 {
-    /*public List<BuildingBase> Buildings { get; set; }
+    public List<BuildingBase> Buildings { get; set; }
 
     public BuildingsManager()
     {
@@ -19,5 +19,5 @@ public class BuildingsManager
     public void RemoveBuilding(BuildingBase buildingBase)
     {
         Buildings.Remove(buildingBase);
-    }*/
+    }
 }

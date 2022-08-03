@@ -2283,6 +2283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb2e63ac1bf4bed4385ce91f09e5bc6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &948458063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,6 +2298,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f01b42200224ef40964471f9d5b6042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Cursor>k__BackingField: {fileID: 0}
+  <Time>k__BackingField: {fileID: 0}
+  <UnitsManager>k__BackingField: {fileID: 0}
+  <WorkerManager>k__BackingField: {fileID: 0}
 --- !u!4 &948458064
 Transform:
   m_ObjectHideFlags: 0
@@ -2322,6 +2329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d779438cda9dece48a62a6d05b9b50f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _quaterDurationInSeconds: 0
 --- !u!114 &948458066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4584,7 +4592,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2013908294}
-  - component: {fileID: 2013908296}
   - component: {fileID: 2013908293}
   - component: {fileID: 2013908292}
   - component: {fileID: 2013908295}
@@ -4697,28 +4704,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!114 &2013908296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013908291}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaaf72c4ec666db488e8720ad20f9d1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
-  dragSpeed: 0
-  minHight: 20
-  maxHight: 40
-  scrollSpeed: 10
-  panBorderThicknes: 2
-  limitPan: {x: 100, y: 100}
-  cameraMain: {fileID: 2013908293}
-  originPos: {x: 0, y: 0, z: 0}
-  offset: {x: 0, y: 0, z: 0}
 --- !u!114 &2013908297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4737,7 +4722,7 @@ MonoBehaviour:
   <maxHight>k__BackingField: 40
   <scrollSpeed>k__BackingField: 10
   <panBorderThicknes>k__BackingField: 2
-  <limitPan>k__BackingField: {x: 0, y: 0}
+  <limitPan>k__BackingField: {x: 100, y: 100}
   <originPos>k__BackingField: {x: 0, y: 0, z: 0}
 --- !u!1 &2079438214
 GameObject:
@@ -5527,3 +5512,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676a2d68a653ced448a25e67a8c8eb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinPrefab: {fileID: 0}
