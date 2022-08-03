@@ -2,13 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+
 [RequireComponent(typeof(Renderer))]
 public class Nomad : UnitBase
 {
-    [SerializeField] private GameObject _villagerPrefab;
+    [SerializeField] private GameObject _citizenPrefab;
     public BuildingNomadsCamp BuildingNomadsCamp { get; set; }
-    public NavMeshAgent Agent { get; private set; }
 
     private Renderer _renderer;
     public Coroutine goesForACoinCoroutine { get; private set; }
@@ -16,7 +15,6 @@ public class Nomad : UnitBase
 
     private void Awake()
     {
-        Agent = GetComponent<NavMeshAgent>();
         _renderer = GetComponent<Renderer>();
     }
 
@@ -37,7 +35,7 @@ public class Nomad : UnitBase
         yield return new WaitForSeconds(1f);
 
         var siblingIndex = transform.GetSiblingIndex();
-        var go = Instantiate(_villagerPrefab, transform.position, Quaternion.identity);
+        var go = Instantiate(_citizenPrefab, transform.position, Quaternion.identity);
         go.transform.SetSiblingIndex(siblingIndex);
 
         Destroy(gameObject);
