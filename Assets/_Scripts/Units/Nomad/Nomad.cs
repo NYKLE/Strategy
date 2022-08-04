@@ -13,14 +13,17 @@ public class Nomad : UnitBase
     public Coroutine goesForACoinCoroutine { get; private set; }
     public bool IsGoingForACoin { get; set; }
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         _renderer = GetComponent<Renderer>();
     }
 
     public IEnumerator GoesForACoinCoroutine(Coin coin)
     {
         IsGoingForACoin = true;
+        Debug.Log(Agent);
         Agent.SetDestination(coin.transform.position);
 
         while (Vector3.Distance(transform.position, coin.transform.position) > Agent.stoppingDistance)

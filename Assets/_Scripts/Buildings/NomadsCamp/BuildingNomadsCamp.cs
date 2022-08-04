@@ -23,7 +23,6 @@ public class BuildingNomadsCamp : BuildingBase
         {
             Vector3 spawnLocation = Random.insideUnitCircle * _spawnRadius;
             spawnLocation.y = transform.position.y;
-            Debug.Log(spawnLocation);
             var go = Instantiate(_nomadPrefab, transform.position + spawnLocation, Quaternion.identity);
             var nomad = go.GetComponent<Nomad>();
             nomad.BuildingNomadsCamp = this;
@@ -33,7 +32,6 @@ public class BuildingNomadsCamp : BuildingBase
 
     public void DeleteNomadFromList(Nomad nomad)
     {
-        Debug.Log($"ID: {nomad}");
         _nomads.Remove(nomad);
     }
 
@@ -45,7 +43,6 @@ public class BuildingNomadsCamp : BuildingBase
             {
                 if (_nomads[i].goesForACoinCoroutine == null && _nomads[i].IsGoingForACoin == false)
                 {
-                    Debug.Log($"Coin index: {i}");
                     StartCoroutine(_nomads[i].GoesForACoinCoroutine(coin));
                     return;
                 }
