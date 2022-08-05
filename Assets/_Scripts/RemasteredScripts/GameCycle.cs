@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GameInit.GameCyrcleModule
 {
     [DisallowMultipleComponent]
-    public class GameCyrcle : MonoBehaviour
+    public class GameCycle : MonoBehaviour
     {
         private readonly Dictionary<CycleMethod, List<ICallable>> _classesToUpdate = new Dictionary<CycleMethod, List<ICallable>>();
 

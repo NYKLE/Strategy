@@ -8,7 +8,7 @@ namespace GameInit.Builders
 {
     public class CameraBuilder
     {
-       public CameraBuilder(GameCyrcle cyrcle)
+       public CameraBuilder(GameCycle cycle)
         {
            var cameraTransform = Object
                  .FindObjectsOfType<GameObject>()
@@ -17,7 +17,7 @@ namespace GameInit.Builders
             var settings = Object.FindObjectOfType<CameraSettings>();
             var cameraMove = new CameraMove(settings, cameraTransform);
             
-            cyrcle.Add(CycleMethod.Update, cameraMove);
+            cycle.Add(CycleMethod.Update, cameraMove);
         }
     }
 }
