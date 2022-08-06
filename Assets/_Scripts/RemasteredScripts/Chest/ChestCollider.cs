@@ -24,7 +24,7 @@ namespace GameInit.Chest
             if (_distance <= _chestSettings.ColliderRadius)
             {
 
-                Object.Destroy(_chestSettings.gameObject);
+               _chestSettings.gameObject.SetActive(false);
             }
         }
     }

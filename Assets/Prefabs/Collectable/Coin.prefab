@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4615295675273178632}
   - component: {fileID: 4615295675273178631}
   - component: {fileID: 4615295675273178630}
-  - component: {fileID: 4615295675273178637}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -50,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5462f081d820ec440af8491a7526c8a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _untouchableTime: 4
 --- !u!114 &4615295675273178634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,25 +674,9 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4615295675273178629}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!54 &4615295675273178637
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4615295675273178629}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

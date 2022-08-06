@@ -12,7 +12,7 @@ public class Coin : MonoBehaviour
     {
         // TODO: Hide effect
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void Awake()
@@ -20,11 +20,14 @@ public class Coin : MonoBehaviour
         _waitForSeconds = new WaitForSeconds(_untouchableTime);
     }
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(UntouchableCoroutine());
     }
-
+    private void OnDisable()
+    {
+        CanPickUp = false;
+    }
     private IEnumerator UntouchableCoroutine()
     {
         yield return _waitForSeconds;

@@ -28,7 +28,12 @@ public class ResourceManager
     {
         if (_resources.ContainsKey(type))
         {
-            _resources[type] = count;
+            _resources[type] += count;
+            if(_resources[type] <= 0)
+            {
+                _resources[type] = 0;
+            }
         }
+        System.Console.WriteLine("resourse " + _resources[type]);
     }
 }
