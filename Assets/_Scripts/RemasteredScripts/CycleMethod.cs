@@ -1,4 +1,4 @@
-namespace GameInit.GameCyrcleModule
+namespace GameInit.GameCycleModule
 {
     public enum CycleMethod
 {

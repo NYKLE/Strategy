@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
+using GameInit.Builders;
 
 [Serializable]
 public class ResourceManager
 {
     private Dictionary<ResourceType, int> _resources;
+    private ResourcesUIBuilder _resourcesUIBuilder;
 
-    public ResourceManager()
+    public ResourceManager(ResourcesUIBuilder resourcesUIBuilder)
     {
+        _resourcesUIBuilder = resourcesUIBuilder;
+
         _resources = new Dictionary<ResourceType, int>();
         foreach (var resType in Enum.GetNames(typeof(ResourceType)))
         {
@@ -34,6 +38,8 @@ public class ResourceManager
                 _resources[type] = 0;
             }
         }
+
+        _resourcesUIBuilder.UpdateUI(GetResource(ResourceType.Gold).ToString());
         System.Console.WriteLine("resourse " + _resources[type]);
     }
 }

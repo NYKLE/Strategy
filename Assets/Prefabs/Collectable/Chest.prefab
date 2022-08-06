@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 5334461403532859549}
   - component: {fileID: 5334461403532859550}
   - component: {fileID: 5334461403532859551}
-  - component: {fileID: 5334461403532861280}
   - component: {fileID: 3917088942440260194}
   m_Layer: 6
   m_Name: Chest
@@ -51,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b844dbdcf4bd7147827dcfb751d202f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <GoldAmount>k__BackingField: 4
-  <ColliderRadius>k__BackingField: 3
+  <GoldAmount>k__BackingField: 100
+  <ColliderRadius>k__BackingField: 2
 --- !u!114 &5334461403532859547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +264,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1227
+  m_VersionIndex: 1230
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -361,19 +360,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!135 &5334461403532861280
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5334461403532861281}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 1, y: 0.5, z: -0.5}
 --- !u!114 &3917088942440260194
 MonoBehaviour:
   m_ObjectHideFlags: 0

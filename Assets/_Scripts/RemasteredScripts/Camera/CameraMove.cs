@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using GameInit.GameCyrcleModule;
+using GameInit.GameCycleModule;
 
 
 namespace GameInit.Camera

@@ -1,7 +1,6 @@
-using System;
-using GameInit.GameCyrcleModule;
+using GameInit.Builders;
+using GameInit.GameCycleModule;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace GameInit.Chest
 {
@@ -9,13 +8,17 @@ namespace GameInit.Chest
     {
         private ChestSettings _chestSettings;
         private HeroSettings _heroSettings;
+        private ChestBuilder _chestBuilder;
+        private ResourceManager _resourceManager;
 
         private float _distance;
 
-        public ChestCollider(ChestSettings chestSettings, HeroSettings heroSettings)
+        public ChestCollider(ChestSettings chestSettings, HeroSettings heroSettings, ChestBuilder chestBuilder, ResourceManager resourceManager)
         {
             _chestSettings = chestSettings;
             _heroSettings = heroSettings;
+            _chestBuilder = chestBuilder;
+            _resourceManager = resourceManager;
         }
 
         public void UpdateCall()
@@ -23,7 +26,8 @@ namespace GameInit.Chest
             _distance = Vector3.Distance(_chestSettings.transform.position, _heroSettings.transform.position);
             if (_distance <= _chestSettings.ColliderRadius)
             {
-
+                _resourceManager.SetResource(ResourceType.Gold, _chestSettings.GoldAmount);
+                _chestBuilder.RemoveChestCollider(CycleMethod.Update, this);
                _chestSettings.gameObject.SetActive(false);
             }
         }

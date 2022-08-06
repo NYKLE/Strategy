@@ -6,6 +6,7 @@ public class HeroSettings : MonoBehaviour
     public Transform Transform { get; private set; }
     public NavMeshAgent Agent { get; private set; }
     private Coin coin;
+
     private void Awake()
     {
         Transform = transform;

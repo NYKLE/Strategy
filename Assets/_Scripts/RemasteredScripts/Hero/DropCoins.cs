@@ -1,6 +1,6 @@
 using UnityEngine;
 using GameInit.PoolOfCoins;
-using GameInit.GameCyrcleModule;
+using GameInit.GameCycleModule;
 using System.Threading.Tasks;
 using System;
 
@@ -11,7 +11,8 @@ namespace GameInit.DropAndCollectGold
         private CoinsPool pool;
         private Transform transform;
         private ResourceManager resourses;
-        HeroSettings heroSettings;
+        private HeroSettings heroSettings;
+
         public DropCoins(CoinsPool _pool, Transform _transform, ResourceManager _resourses, HeroSettings _heroSettings)
         {
             pool = _pool;

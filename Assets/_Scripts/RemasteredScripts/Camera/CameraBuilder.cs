@@ -1,6 +1,6 @@
 using UnityEngine;
 using GameInit.Camera;
-using GameInit.GameCyrcleModule;
+using GameInit.GameCycleModule;
 using System.Linq;
 using GameInit.Utility;
 

@@ -22,6 +22,6 @@ public class Managers : MonoBehaviour
         }
 
         BuildingsManager = new BuildingsManager();
-        ResourceManager = new ResourceManager();
+        //ResourceManager = new ResourceManager();
     }
 }
