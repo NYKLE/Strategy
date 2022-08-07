@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using GameInit.Chest;
 using GameInit.GameCycleModule;
-using Unity.Collections;
-using Unity.Jobs;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace GameInit.Builders
@@ -15,15 +12,13 @@ namespace GameInit.Builders
         private GameCycle _cycle;
         private HeroSettings _heroSettings;
         private ResourceManager _resourceManager;
-        private ResourcesUIBuilder _resourcesUIBuilder;
         private ChestSettings[] _chestSettings;
 
-        public ChestBuilder(GameCycle cycle, HeroSettings heroSettings, ResourceManager resourceManager, ResourcesUIBuilder resourcesUIBuilder)
+        public ChestBuilder(GameCycle cycle, HeroSettings heroSettings, ResourceManager resourceManager)
         {
             _cycle = cycle;
             _heroSettings = heroSettings;
             _resourceManager = resourceManager;
-            _resourcesUIBuilder = resourcesUIBuilder;
 
             _chestSettings = Object.FindObjectsOfType<ChestSettings>();
 
@@ -34,13 +29,19 @@ namespace GameInit.Builders
                 var chestCollider = new ChestCollider(settings, _heroSettings, this, _resourceManager);
                 Colliders.Add(chestCollider);
 
-                cycle.Add(CycleMethod.Update, chestCollider);
+                //cycle.Add(CycleMethod.Update, chestCollider);
+                cycle.Add((IUpdate)chestCollider);
             }
         }
 
         public void RemoveChestCollider(CycleMethod method, ICallable callable)
         {
             _cycle.Remove(method, callable);
+        }
+
+        public void RemoveChestCollider(IUpdate update)
+        {
+            _cycle.Remove(update);
         }
     }
 }

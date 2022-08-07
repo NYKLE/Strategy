@@ -9,6 +9,11 @@ namespace GameInit.GameCycleModule
     {
         private readonly Dictionary<CycleMethod, List<ICallable>> _classesToUpdate = new Dictionary<CycleMethod, List<ICallable>>();
 
+        // ====== TEST ======
+        private readonly List<IUpdate> _updates = new List<IUpdate>(100);
+        private readonly List<ILateUpdate> _lateUpdates = new List<ILateUpdate>(20);
+        // ==================
+
         public void Init()
         {
             _classesToUpdate[CycleMethod.Update] = new List<ICallable>();
@@ -32,20 +37,56 @@ namespace GameInit.GameCycleModule
             }
         }
 
+        // ====== TEST ======
+        public void Add(IUpdate update)
+        {
+            _updates.Add(update);
+        }
+
+        public void Add(ILateUpdate lateUpdate)
+        {
+            _lateUpdates.Add(lateUpdate);
+        }
+
+        public void Remove(IUpdate update)
+        {
+            _updates.Remove(update);
+        }
+
+        public void Remove(ILateUpdate lateUpdate)
+        {
+            _lateUpdates.Remove(lateUpdate);
+        }
+        // ==================
+
         private void Update()
         {
             foreach (var item in _classesToUpdate[CycleMethod.Update].ToArray())
             {
                 item.UpdateCall();
             }
+
+            // ====== TEST ======
+            foreach (var update in _updates.ToArray())
+            {
+                update.OnUpdate();
+            }
+            // ==================
         }
 
         private void LateUpdate()
         {
             foreach (var item in _classesToUpdate[CycleMethod.LateUpdate].ToArray())
             {
-                item.LateUpdateCall();
+                item.UpdateCall();
             }
+
+            // ====== TEST ======
+            foreach (var lateUpdate in _lateUpdates.ToArray())
+            {
+                lateUpdate.OnLateUpdate();
+            }
+            // ==================
         }
     }
 }

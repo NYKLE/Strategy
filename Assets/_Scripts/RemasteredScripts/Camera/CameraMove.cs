@@ -82,11 +82,6 @@ namespace GameInit.Camera
 			MoveController();
 			DragAndDropCameraMove();
 		}
-
-        public void LateUpdateCall()
-        {
-            
-        }
     }
 }
 

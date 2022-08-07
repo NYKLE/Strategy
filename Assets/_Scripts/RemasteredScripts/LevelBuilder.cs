@@ -48,7 +48,7 @@ namespace GameInit.Builders
 
         private void ChestBuilder(GameCycle gameCycle, HeroSettings heroSettings)
         {
-            _chestBuilder = new ChestBuilder(gameCycle, heroSettings, _resourceManager, _resourcesUIBuilder);
+            _chestBuilder = new ChestBuilder(gameCycle, heroSettings, _resourceManager);
         }
 
         private void CoinPool()
