@@ -1,6 +1,7 @@
 using GameInit.Builders;
 using GameInit.GameCycleModule;
-using UnityEngine;
+using Unity.Collections;
+using Unity.Jobs;
 
 namespace GameInit.Chest
 {
@@ -11,7 +12,8 @@ namespace GameInit.Chest
         private ChestBuilder _chestBuilder;
         private ResourceManager _resourceManager;
 
-        private float _distance;
+        private NativeArray<float> _result;
+        private JobHandle _jobHandle;
 
         public ChestCollider(ChestSettings chestSettings, HeroSettings heroSettings, ChestBuilder chestBuilder, ResourceManager resourceManager)
         {
@@ -23,13 +25,29 @@ namespace GameInit.Chest
 
         public void UpdateCall()
         {
-            _distance = Vector3.Distance(_chestSettings.transform.position, _heroSettings.transform.position);
-            if (_distance <= _chestSettings.ColliderRadius)
+            _result = new NativeArray<float>(1, Allocator.TempJob);
+            DistanceJob distanceJob = new DistanceJob()
+            {
+                chestPos = _chestSettings.transform.position,
+                heroPos = _heroSettings.transform.position,
+                result = _result
+            };
+            _jobHandle = distanceJob.Schedule();
+            _jobHandle.Complete();
+
+            if (_result[0] <= _chestSettings.ColliderRadius)
             {
                 _resourceManager.SetResource(ResourceType.Gold, _chestSettings.GoldAmount);
                 _chestBuilder.RemoveChestCollider(CycleMethod.Update, this);
-               _chestSettings.gameObject.SetActive(false);
+                _chestSettings.gameObject.SetActive(false);
             }
+
+            _result.Dispose();
+        }
+
+        public void LateUpdateCall()
+        {
+            
         }
     }
 }

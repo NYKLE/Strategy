@@ -30,6 +30,11 @@ namespace GameInit.DropAndCollectGold
             CollectGold();
         }
 
+        public void LateUpdateCall()
+        {
+
+        }
+
         private async void DropCoin()
         {
             await Task.Delay(TimeSpan.FromSeconds(0.2f));

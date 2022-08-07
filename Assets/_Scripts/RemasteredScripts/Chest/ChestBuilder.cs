@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using GameInit.Chest;
 using GameInit.GameCycleModule;
+using Unity.Collections;
+using Unity.Jobs;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace GameInit.Builders
@@ -13,6 +16,7 @@ namespace GameInit.Builders
         private HeroSettings _heroSettings;
         private ResourceManager _resourceManager;
         private ResourcesUIBuilder _resourcesUIBuilder;
+        private ChestSettings[] _chestSettings;
 
         public ChestBuilder(GameCycle cycle, HeroSettings heroSettings, ResourceManager resourceManager, ResourcesUIBuilder resourcesUIBuilder)
         {
@@ -21,10 +25,11 @@ namespace GameInit.Builders
             _resourceManager = resourceManager;
             _resourcesUIBuilder = resourcesUIBuilder;
 
-            Colliders = new List<ChestCollider>();
-            ChestSettings[] chestSettings = Object.FindObjectsOfType<ChestSettings>();
+            _chestSettings = Object.FindObjectsOfType<ChestSettings>();
 
-            foreach (var settings in chestSettings)
+            Colliders = new List<ChestCollider>(_chestSettings.Length);
+
+            foreach (var settings in _chestSettings)
             {
                 var chestCollider = new ChestCollider(settings, _heroSettings, this, _resourceManager);
                 Colliders.Add(chestCollider);

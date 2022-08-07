@@ -44,7 +44,7 @@ namespace GameInit.GameCycleModule
         {
             foreach (var item in _classesToUpdate[CycleMethod.LateUpdate].ToArray())
             {
-                item.UpdateCall();
+                item.LateUpdateCall();
             }
         }
     }
