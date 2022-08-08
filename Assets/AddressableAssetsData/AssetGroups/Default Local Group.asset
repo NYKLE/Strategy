@@ -16,7 +16,11 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 2fa1239a39dd42b4d9cd4b5e8d6389f5
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 03de11b8707c33240b17ac1c0ed6ee21
+    m_Address: DistanceComputeShader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e340e9df4a39def44879f48df4861a31, type: 2}
   m_SchemaSet:

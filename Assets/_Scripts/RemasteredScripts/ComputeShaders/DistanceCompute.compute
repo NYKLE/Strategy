@@ -1,0 +1,11 @@
+#pragma kernel Distance
+
+RWStructuredBuffer<float> _Result;
+float3 _ThisObjectPosition;
+float3 _TargetObjectPosition;
+
+[numthreads(1,1,1)]
+void Distance (uint3 id : SV_DispatchThreadID)
+{
+    _Result[id.x] = distance(_ThisObjectPosition, _TargetObjectPosition);;
+}
