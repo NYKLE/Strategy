@@ -1,11 +1,10 @@
 using GameInit.Builders;
-using GameInit.GameCycleModule;
 using Unity.Collections;
 using Unity.Jobs;
 
 namespace GameInit.Chest
 {
-    public class ChestCollider : ICallable, IUpdate, ILateUpdate
+    public class ChestCollider : IUpdate
     {
         private ChestSettings _chestSettings;
         private HeroSettings _heroSettings;
@@ -21,28 +20,6 @@ namespace GameInit.Chest
             _heroSettings = heroSettings;
             _chestBuilder = chestBuilder;
             _resourceManager = resourceManager;
-        }
-
-        public void UpdateCall()
-        {
-            _result = new NativeArray<float>(1, Allocator.TempJob);
-            DistanceJob distanceJob = new DistanceJob()
-            {
-                ThisObjectPosition = _chestSettings.transform.position,
-                TargetObjectPosition = _heroSettings.transform.position,
-                Result = _result
-            };
-            _jobHandle = distanceJob.Schedule();
-            _jobHandle.Complete();
-
-            if (_result[0] <= _chestSettings.ColliderRadius)
-            {
-                _resourceManager.SetResource(ResourceType.Gold, _chestSettings.GoldAmount);
-                _chestBuilder.RemoveChestCollider(CycleMethod.Update, this);
-                _chestSettings.gameObject.SetActive(false);
-            }
-
-            _result.Dispose();
         }
 
         public void OnUpdate()
@@ -65,11 +42,6 @@ namespace GameInit.Chest
             }
 
             _result.Dispose();
-        }
-
-        public void OnLateUpdate()
-        {
-            // Late Update Logic
         }
     }
 }

@@ -7,8 +7,6 @@ namespace GameInit.Builders
 {
     public class ChestBuilder
     {
-        public List<ChestCollider> Colliders { get; }
-
         private GameCycle _cycle;
         private HeroSettings _heroSettings;
         private ResourceManager _resourceManager;
@@ -22,15 +20,11 @@ namespace GameInit.Builders
 
             _chestSettings = Object.FindObjectsOfType<ChestSettings>();
 
-            Colliders = new List<ChestCollider>(_chestSettings.Length);
-
             foreach (var settings in _chestSettings)
             {
-                var chestCollider = new ChestCollider(settings, _heroSettings, this, _resourceManager);
-                Colliders.Add(chestCollider);
+                ChestCollider chestCollider = new ChestCollider(settings, _heroSettings, this, _resourceManager);
 
-                //cycle.Add(CycleMethod.Update, chestCollider);
-                cycle.Add((IUpdate)chestCollider);
+                cycle.Add(chestCollider);
             }
         }
 

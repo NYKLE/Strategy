@@ -16,10 +16,10 @@ namespace GameInit.Builders
         private HeroBuilder _heroBuilder;
         private CameraBuilder _cameraBuilder;
         private ChestBuilder _chestBuilder;
-        private CoinsPool _pool;
+        private CoinsPool _coinsPool;
         private ResourceManager _resourceManager;
         private ResourcesUIBuilder _resourcesUIBuilder;
-
+        private ConstructionBuilder _constructionBuilder;
 
         private void Awake()
         {
@@ -32,13 +32,19 @@ namespace GameInit.Builders
             CameraBuilder(gameCycle);
             HeroBuilder(gameCycle);
             ChestBuilder(gameCycle, _heroBuilder.GetHeroSettings());
+            ConstructionBuilder(gameCycle);
 
             Hacks();
         }
 
+        private void ConstructionBuilder(GameCycle cycle)
+        {
+            _constructionBuilder = new ConstructionBuilder(cycle, _coinsPool);
+        }
+
         private void HeroBuilder(GameCycle gameCycle)
         {
-            _heroBuilder = new HeroBuilder(gameCycle, _pool, _resourceManager);
+            _heroBuilder = new HeroBuilder(gameCycle, _coinsPool, _resourceManager);
         }
 
         private void CameraBuilder(GameCycle gameCycle)
@@ -53,8 +59,8 @@ namespace GameInit.Builders
 
         private void CoinPool()
         {
-            _pool = GameObject.FindObjectOfType<CoinsPool>();
-            _pool.CreatPool();
+            _coinsPool = GameObject.FindObjectOfType<CoinsPool>();
+            _coinsPool.CreatePool();
         }
 
         private void ResourcesUIBuilder()

@@ -14,7 +14,7 @@ namespace GameInit.PoolOfCoins
         [SerializeField] private int _maxCapacity;
         [Space(10)] [SerializeField] private bool _isExpand;
 
-        private List<GameObject> _pool;
+        public List<GameObject> _pool { get; private set; }
         private void OnExpand()
         {
             if (_isExpand)
@@ -23,7 +23,7 @@ namespace GameInit.PoolOfCoins
             }
         }
 
-        public void CreatPool()
+        public void CreatePool()
         {
             _pool = new List<GameObject>();
 
