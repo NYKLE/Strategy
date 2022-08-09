@@ -4,7 +4,7 @@ using GameInit.GameCycleModule;
 
 namespace GameInit.Camera
 {
-	public class CameraMove : ICallable
+	public class CameraMove : IUpdate
 	{
 		private CameraSettings settings;
 		
@@ -77,7 +77,7 @@ namespace GameInit.Camera
 			}
 		}
 
-        public void UpdateCall()
+        public void OnUpdate()
         {
 			MoveController();
 			DragAndDropCameraMove();

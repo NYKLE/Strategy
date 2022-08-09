@@ -17,7 +17,7 @@ namespace GameInit.Builders
             var settings = Object.FindObjectOfType<CameraSettings>();
             var cameraMove = new CameraMove(settings, cameraTransform);
             
-            cycle.Add(CycleMethod.Update, cameraMove);
+            cycle.Add(cameraMove);
         }
     }
 }

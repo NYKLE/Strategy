@@ -1,18 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace GameInit.PoolOfCoins
+namespace GameInit.Pool
 {
-    public class CoinsPool : MonoBehaviour
+    public class Pools
     {
-        [SerializeField] private GameObject prefabCoin;
+        [SerializeField] private GameObject _prefab;
 
-        [Space(10)] [SerializeField] private Transform _container;
-        [SerializeField] private int _minCapacity;
-        [SerializeField] private int _maxCapacity;
-        [Space(10)] [SerializeField] private bool _isExpand;
+        private Transform _container;
+        private int _minCapacity = 10;
+        private int _maxCapacity = Int32.MaxValue;
+        private bool _isExpand;
 
         public List<GameObject> _pool { get; private set; }
         private void OnExpand()
@@ -23,8 +22,9 @@ namespace GameInit.PoolOfCoins
             }
         }
 
-        public void CreatePool()
+        public Pools(GameObject prefab)
         {
+            _prefab = prefab;
             _pool = new List<GameObject>();
 
             for (int i = 0; i < _minCapacity; i++)
@@ -34,7 +34,7 @@ namespace GameInit.PoolOfCoins
         }
         private GameObject CreateObj(bool isActibebydefault = false)
         {
-            var createdObj = Instantiate(prefabCoin, _container);
+            var createdObj = MonoBehaviour.Instantiate(_prefab, _container);
             createdObj.gameObject.SetActive(isActibebydefault);
 
             _pool.Add(createdObj);
@@ -55,7 +55,21 @@ namespace GameInit.PoolOfCoins
             gameobj = null;
             return false;
         }
-
+        public bool TryGetEngagedElement(out List<GameObject> _list)
+        {
+            _list = new List<GameObject>();
+            bool isNotEmpty = false;
+            foreach (var item in _pool)
+            {
+                if (item.gameObject.activeInHierarchy)
+                {
+                    _list.Add(item);
+                    isNotEmpty = true;
+                }
+            }
+            
+            return isNotEmpty;
+        }
         public GameObject GetFreeElements(Vector3 pos, Quaternion rotation)
         {
             var obj = GetFreeElements(pos);
@@ -67,6 +81,24 @@ namespace GameInit.PoolOfCoins
             var obj = GetFreeElements();
             obj.transform.position = pos;
             return obj;
+        }
+        public GameObject GetClosestEngagedElements(Vector3 pos)
+        {
+            var obj = GetEngagedElements();
+            GameObject closestObj = null;
+            for (int i = 0; i < obj.Count - 1; i++)
+            {
+                if(Vector3.Distance(pos, obj[i].transform.position) < Vector3.Distance(pos, obj[i + 1].transform.position))
+                {
+                    closestObj = obj[i];
+                }
+                else
+                {
+                    closestObj = obj[i + 1];
+                }
+            }
+            if (obj.Count - 1 == 0 && obj.Count != 0) return obj[0];
+            return closestObj;
         }
         public GameObject GetFreeElements()
         {
@@ -82,6 +114,14 @@ namespace GameInit.PoolOfCoins
             if(_pool.Count < _maxCapacity)
             {
                 return CreateObj(true);
+            }
+            throw new Exception("Pool is over!");
+        }
+        public List<GameObject> GetEngagedElements()
+        {
+            if (TryGetEngagedElement(out var gameObj))
+            {
+                return gameObj;
             }
             throw new Exception("Pool is over!");
         }

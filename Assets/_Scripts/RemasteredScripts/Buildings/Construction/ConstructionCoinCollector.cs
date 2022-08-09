@@ -1,6 +1,6 @@
 using GameInit.Builders;
 using GameInit.Component;
-using GameInit.PoolOfCoins;
+using GameInit.Pool;
 using Unity.Collections;
 using Unity.Jobs;
 using Unity.Mathematics;
@@ -13,15 +13,15 @@ namespace GameInit.Construction
         private NativeArray<float> _result;
         private JobHandle _jobHandle;
 
-        private CoinsPool _coinsPool;
+        private Pools _Pools;
         private ConstructionBuilder _constructionBuilder;
         private ConstructionComponent _constructionComponent;
 
         private NativeArray<float3> _targets;
 
-        public ConstructionCoinCollector(CoinsPool coinPool, ConstructionBuilder constructionBuilder, ConstructionComponent constructionComponent)
+        public ConstructionCoinCollector(Pools coinPool, ConstructionBuilder constructionBuilder, ConstructionComponent constructionComponent)
         {
-            _coinsPool = coinPool;
+            _Pools = coinPool;
             _constructionBuilder = constructionBuilder;
             _constructionComponent = constructionComponent;
         }
@@ -38,10 +38,10 @@ namespace GameInit.Construction
 
         private void CheckCollisionByJobs()
         {
-            _targets = new NativeArray<float3>(_coinsPool._pool.Count, Allocator.TempJob);
-            for (int i = 0; i < _coinsPool._pool.Count; i++)
+            _targets = new NativeArray<float3>(_Pools._pool.Count, Allocator.TempJob);
+            for (int i = 0; i < _Pools._pool.Count; i++)
             {
-                _targets[i] = _coinsPool._pool[i].transform.position;
+                _targets[i] = _Pools._pool[i].transform.position;
             }
 
             _result = new NativeArray<float>(_targets.Length, Allocator.TempJob);

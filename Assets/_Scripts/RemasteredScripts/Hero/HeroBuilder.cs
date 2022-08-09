@@ -1,6 +1,6 @@
 using GameInit.GameCycleModule;
 using UnityEngine;
-using GameInit.PoolOfCoins;
+using GameInit.Pool;
 using GameInit.DropAndCollectGold;
 
 namespace GameInit.Builders
@@ -9,7 +9,7 @@ namespace GameInit.Builders
     {
         private HeroComponent _heroComponent;
 
-        public HeroBuilder(GameCycle gameCycle, CoinsPool _pool, ResourceManager resources)
+        public HeroBuilder(GameCycle gameCycle, Pools _pool, ResourceManager resources)
         {
             var hero = Object.FindObjectOfType<Hero>();
 
@@ -18,7 +18,7 @@ namespace GameInit.Builders
             var dropCoins = new DropCoins(_pool, transform, resources, _heroComponent);
             var move = new HeroMove();
 
-            gameCycle.Add(CycleMethod.Update, dropCoins);
+            gameCycle.Add(dropCoins);
         }
 
         public HeroComponent GetHeroSettings()

@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using GameInit.Component;
 using GameInit.GameCycleModule;
-using GameInit.PoolOfCoins;
+using GameInit.Pool;
+using GameInit.PoolPrefabs;
 
 namespace GameInit.Builders
 {
@@ -14,96 +14,42 @@ namespace GameInit.Builders
     {
         private readonly List<IDisposable> _dispose = new List<IDisposable>();
 
-        private HeroBuilder _heroBuilder;
-        private CameraBuilder _cameraBuilder;
-        private ChestBuilder _chestBuilder;
-        private CoinsPool _coinsPool;
-        private ResourceManager _resourceManager;
-        private ResourcesUIBuilder _resourcesUIBuilder;
-        private ConstructionBuilder _constructionBuilder;
-        private NomadsCampBuilder _nomadsCampBuilder;
-        private NomadBuilder _nomadBuilder;
-        private CitizensBuilder _citizensBuilder;
-        private CitizenPoolBuilder _citizenPoolBuilder;
-
         private void Awake()
         {
             var gameCycle = GetComponent<GameCycle>();
-            
+            var prefabHolder = FindObjectOfType<PrefabPoolHolder>(); 
 
-            CoinPool();
-            Resources();
-
-            CameraBuilder(gameCycle);
-            HeroBuilder(gameCycle);
-            ChestBuilder(gameCycle, _heroBuilder.GetHeroSettings());
-            ConstructionBuilder(gameCycle);
-            CitizenPoolBuilder();
-            CitizenBuilder(gameCycle);
-            NomadsCampBuilder(gameCycle);
-
-
-            Hacks();
+            Builders(gameCycle, prefabHolder);
         }
 
-        private void CitizenPoolBuilder()
+        private void Builders(GameCycle gameCyrcle, PrefabPoolHolder prefabHolder)
         {
-            _citizenPoolBuilder = new CitizenPoolBuilder();
-        }
+             
+            Pools _CoinPool = new Pools(prefabHolder.GetCoinPrefab());
+            Pools _NomandPool = new Pools(prefabHolder.GetNomandPrefab());
 
-        private void CitizenBuilder(GameCycle cycle)
-        {
-            _citizensBuilder = new CitizensBuilder(cycle);
-        }
+            CitizenPoolBuilder _citizenPoolBuilder = new CitizenPoolBuilder();
 
-        private void NomadBuilder(GameCycle cycle)
+            CameraBuilder _cameraBuilder = new CameraBuilder(gameCyrcle);
+            ResourcesUIBuilder _resourcesUIBuilder = new ResourcesUIBuilder();
+            ResourceManager _resourceManager = new ResourceManager(_resourcesUIBuilder);
+
+            HeroBuilder _heroBuilder = new HeroBuilder(gameCyrcle, _CoinPool, _resourceManager);
+            ConstructionBuilder _constructionBuilder = new ConstructionBuilder(gameCyrcle, _CoinPool);
+          //  NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPoolBuilder);
+            CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle);
+
+
+            ChestBuilder _chestBuilder = new ChestBuilder(gameCyrcle, _heroBuilder.GetHeroSettings(), _resourceManager);
+
+            Hacks(_resourceManager);
+        }
+       /* private void NomadBuilder(GameCycle cycle)
         {
             //_nomadBuilder = new NomadBuilder(cycle, _nomadsCampBuilder, _citizenPoolBuilder);
-        }
+        }*/
 
-        private void NomadsCampBuilder(GameCycle cycle)
-        {
-            _nomadsCampBuilder = new NomadsCampBuilder(cycle, _citizenPoolBuilder);
-        }
-
-        private void ConstructionBuilder(GameCycle cycle)
-        {
-            _constructionBuilder = new ConstructionBuilder(cycle, _coinsPool);
-        }
-
-        private void HeroBuilder(GameCycle gameCycle)
-        {
-            _heroBuilder = new HeroBuilder(gameCycle, _coinsPool, _resourceManager);
-        }
-
-        private void CameraBuilder(GameCycle gameCycle)
-        {
-            _cameraBuilder = new CameraBuilder(gameCycle);
-        }
-
-        private void ChestBuilder(GameCycle gameCycle, HeroComponent heroComponent)
-        {
-            _chestBuilder = new ChestBuilder(gameCycle, heroComponent, _resourceManager);
-        }
-
-        private void CoinPool()
-        {
-            _coinsPool = GameObject.FindObjectOfType<CoinsPool>();
-            _coinsPool.CreatePool();
-        }
-
-        private void ResourcesUIBuilder()
-        {
-            _resourcesUIBuilder = new ResourcesUIBuilder();
-        }
-
-        private void Resources()
-        {
-            ResourcesUIBuilder();
-            _resourceManager = new ResourceManager(_resourcesUIBuilder);
-        }
-
-        private void Hacks()
+        private void Hacks(ResourceManager _resourceManager)
         {
             _resourceManager.SetResource(ResourceType.Gold, 11);
         }

@@ -7,7 +7,7 @@ namespace GameInit.GameCycleModule
     [DisallowMultipleComponent]
     public class GameCycle : MonoBehaviour
     {
-        private readonly Dictionary<CycleMethod, List<ICallable>> _classesToUpdate = new Dictionary<CycleMethod, List<ICallable>>();
+      //  private readonly Dictionary<CycleMethod, List<ICallable>> _classesToUpdate = new Dictionary<CycleMethod, List<ICallable>>();
 
         // ====== TEST ======
         private readonly List<IUpdate> _updates = new List<IUpdate>(100);

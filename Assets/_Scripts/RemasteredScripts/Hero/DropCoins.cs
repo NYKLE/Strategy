@@ -1,33 +1,25 @@
 using UnityEngine;
-using GameInit.PoolOfCoins;
+using GameInit.Pool;
 using GameInit.GameCycleModule;
 using System.Threading.Tasks;
 using System;
 
+
 namespace GameInit.DropAndCollectGold
 {
-    public class DropCoins : ICallable
+    public class DropCoins : IUpdate
     {
-        private CoinsPool pool;
+        private Pools pool;
         private Transform transform;
         private ResourceManager resourses;
         private HeroComponent _heroComponent;
 
-        public DropCoins(CoinsPool _pool, Transform _transform, ResourceManager _resourses, HeroComponent heroComponent)
+        public DropCoins(Pools _pool, Transform _transform, ResourceManager _resourses, HeroComponent heroComponent)
         {
             pool = _pool;
             transform = _transform;
             resourses = _resourses;
             _heroComponent = heroComponent;
-        }
-
-        public void UpdateCall()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && resourses.GetResource(ResourceType.Gold) != 0)
-            {
-                DropCoin();
-            }
-            CollectGold();
         }
 
         private async void DropCoin()
@@ -43,6 +35,15 @@ namespace GameInit.DropAndCollectGold
                 _heroComponent.GetCoin().Hide();
                 resourses.SetResource(ResourceType.Gold, 1);
             }
+        }
+
+        public void OnUpdate()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && resourses.GetResource(ResourceType.Gold) != 0)
+            {
+                DropCoin();
+            }
+            CollectGold();
         }
     }
 }

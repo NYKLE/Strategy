@@ -1,7 +1,7 @@
 using GameInit.Component;
 using GameInit.Construction;
 using GameInit.GameCycleModule;
-using GameInit.PoolOfCoins;
+using GameInit.Pool;
 using UnityEngine;
 
 namespace GameInit.Builders
@@ -11,7 +11,7 @@ namespace GameInit.Builders
         private ConstructionComponent[] _constructionComponent;
         private GameCycle _cycle;
 
-        public ConstructionBuilder(GameCycle cycle, CoinsPool coinPool)
+        public ConstructionBuilder(GameCycle cycle, Pools coinPool)
         {
             _constructionComponent = Object.FindObjectsOfType<ConstructionComponent>();
 
