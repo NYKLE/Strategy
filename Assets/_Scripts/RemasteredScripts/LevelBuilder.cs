@@ -29,7 +29,7 @@ namespace GameInit.Builders
         private void Awake()
         {
             var gameCycle = GetComponent<GameCycle>();
-            gameCycle.Init();
+            
 
             CoinPool();
             Resources();

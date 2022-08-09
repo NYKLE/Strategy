@@ -15,8 +15,9 @@ public class HeroComponent : MonoBehaviour, ISelectable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Coin>() && other.gameObject.GetComponent<Coin>().CanPickUp)
-        {
+        var _coin = other.gameObject.GetComponent<Coin>();
+        if (_coin && _coin.CanPickUp) 
+        { 
             coin = other.gameObject.GetComponent<Coin>();
         }
     }
