@@ -52,9 +52,9 @@ namespace GameInit.Builders
             _cameraBuilder = new CameraBuilder(gameCycle);
         }
 
-        private void ChestBuilder(GameCycle gameCycle, HeroSettings heroSettings)
+        private void ChestBuilder(GameCycle gameCycle, HeroComponent heroComponent)
         {
-            _chestBuilder = new ChestBuilder(gameCycle, heroSettings, _resourceManager);
+            _chestBuilder = new ChestBuilder(gameCycle, heroComponent, _resourceManager);
         }
 
         private void CoinPool()

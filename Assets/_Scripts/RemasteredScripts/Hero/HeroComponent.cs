@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class HeroSettings : MonoBehaviour
+public class HeroComponent : MonoBehaviour
 {
     public Transform Transform { get; private set; }
     public NavMeshAgent Agent { get; private set; }

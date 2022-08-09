@@ -17,8 +17,8 @@ namespace GameInit.Builders
 
             foreach (var constructionComponent in _constructionComponent)
             {
-                ConstructionCollider constructionCollider = new ConstructionCollider(coinPool, this, constructionComponent);
-                cycle.Add(constructionCollider);
+                ConstructionCoinCollector constructionCoinCollector = new ConstructionCoinCollector(coinPool, this, constructionComponent);
+                cycle.Add(constructionCoinCollector);
             }
         }
 

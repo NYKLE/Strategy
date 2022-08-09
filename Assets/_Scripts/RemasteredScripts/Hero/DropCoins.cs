@@ -11,14 +11,14 @@ namespace GameInit.DropAndCollectGold
         private CoinsPool pool;
         private Transform transform;
         private ResourceManager resourses;
-        private HeroSettings heroSettings;
+        private HeroComponent _heroComponent;
 
-        public DropCoins(CoinsPool _pool, Transform _transform, ResourceManager _resourses, HeroSettings _heroSettings)
+        public DropCoins(CoinsPool _pool, Transform _transform, ResourceManager _resourses, HeroComponent heroComponent)
         {
             pool = _pool;
             transform = _transform;
             resourses = _resourses;
-            heroSettings = _heroSettings;
+            _heroComponent = heroComponent;
         }
 
         public void UpdateCall()
@@ -38,9 +38,9 @@ namespace GameInit.DropAndCollectGold
         }
         private void CollectGold()
         {
-            if(heroSettings.GetCoin() != null && heroSettings.GetCoin().CanPickUp)
+            if(_heroComponent.GetCoin() != null && _heroComponent.GetCoin().CanPickUp)
             {
-                heroSettings.GetCoin().Hide();
+                _heroComponent.GetCoin().Hide();
                 resourses.SetResource(ResourceType.Gold, 1);
             }
         }

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace GameInit.Construction
 {
-    public class ConstructionCollider : IUpdate
+    public class ConstructionCoinCollector : IUpdate
     {
         private NativeArray<float> _result;
         private JobHandle _jobHandle;
@@ -19,7 +19,7 @@ namespace GameInit.Construction
 
         private NativeArray<float3> _targets;
 
-        public ConstructionCollider(CoinsPool coinPool, ConstructionBuilder constructionBuilder, ConstructionComponent constructionComponent)
+        public ConstructionCoinCollector(CoinsPool coinPool, ConstructionBuilder constructionBuilder, ConstructionComponent constructionComponent)
         {
             _coinsPool = coinPool;
             _constructionBuilder = constructionBuilder;
@@ -27,6 +27,16 @@ namespace GameInit.Construction
         }
 
         public void OnUpdate()
+        {
+            //CheckCollisionByJobs();
+
+            if (_constructionComponent.GoldNeededToBuild == 0)
+            {
+                Debug.Log("Build Prefab");
+            }
+        }
+
+        private void CheckCollisionByJobs()
         {
             _targets = new NativeArray<float3>(_coinsPool._pool.Count, Allocator.TempJob);
             for (int i = 0; i < _coinsPool._pool.Count; i++)
@@ -50,7 +60,7 @@ namespace GameInit.Construction
                 if (_result[i] <= _constructionComponent.ColliderRadius)
                 {
                     Debug.Log("Collision");
-                    _constructionBuilder.RemoveCollider(this);
+                    //_constructionBuilder.RemoveCollider(this);
                 }
             }
 

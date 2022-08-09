@@ -8,8 +8,8 @@ namespace GameInit.Chest
 {
     public class ChestCollider : IUpdate
     {
-        private ChestSettings _chestSettings;
-        private HeroSettings _heroSettings;
+        private ChestComponent _chestComponent;
+        private HeroComponent _heroComponent;
         private ChestBuilder _chestBuilder;
         private ResourceManager _resourceManager;
 
@@ -27,10 +27,10 @@ namespace GameInit.Chest
         private float[] _targetPositions;
         private float[] _CSResult;
 
-        public ChestCollider(ChestSettings chestSettings, HeroSettings heroSettings, ChestBuilder chestBuilder, ResourceManager resourceManager)
+        public ChestCollider(ChestComponent chestComponent, HeroComponent heroComponent, ChestBuilder chestBuilder, ResourceManager resourceManager)
         {
-            _chestSettings = chestSettings;
-            _heroSettings = heroSettings;
+            _chestComponent = chestComponent;
+            _heroComponent = heroComponent;
             _chestBuilder = chestBuilder;
             _resourceManager = resourceManager;
 
@@ -47,24 +47,43 @@ namespace GameInit.Chest
         public void OnUpdate()
         {
             //CalculateDistanceByJobs();
-            CalculateDistanceByComputeShader();
+            //CalculateDistanceByComputeShader();
+            //CalculateDistanceByVector3();
+
+            if (_chestComponent.IsCollided)
+            {
+                _resourceManager.SetResource(ResourceType.Gold, _chestComponent.GoldAmount);
+                _chestBuilder.RemoveChestCollider(this);
+                _chestComponent.gameObject.SetActive(false);
+            }
+        }
+
+        private void CalculateDistanceByVector3()
+        {
+            if (Vector3.Distance(_chestComponent.transform.position, _heroComponent.transform.position) <=
+                _chestComponent.ColliderRadius)
+            {
+                _resourceManager.SetResource(ResourceType.Gold, _chestComponent.GoldAmount);
+                _chestBuilder.RemoveChestCollider(this);
+                _chestComponent.gameObject.SetActive(false);
+            }
         }
 
         private void CalculateDistanceByComputeShader()
         {
             _thisPositions = new[]
             {
-                _chestSettings.transform.position.x,
-                _chestSettings.transform.position.y,
-                _chestSettings.transform.position.z
+                _chestComponent.transform.position.x,
+                _chestComponent.transform.position.y,
+                _chestComponent.transform.position.z
             };
             _distanceComputeShader.SetFloats(_ThisObjectPositionCS, _thisPositions);
 
             _targetPositions = new[]
             {
-                _heroSettings.transform.position.x,
-                _heroSettings.transform.position.y,
-                _heroSettings.transform.position.z
+                _heroComponent.transform.position.x,
+                _heroComponent.transform.position.y,
+                _heroComponent.transform.position.z
             };
             _distanceComputeShader.SetFloats(_TargetObjectPositionCS, _targetPositions);
 
@@ -75,11 +94,11 @@ namespace GameInit.Chest
 
             _computeBuffer.GetData(_CSResult);
 
-            if (_CSResult[0] <= _chestSettings.ColliderRadius)
+            if (_CSResult[0] <= _chestComponent.ColliderRadius)
             {
-                _resourceManager.SetResource(ResourceType.Gold, _chestSettings.GoldAmount);
+                _resourceManager.SetResource(ResourceType.Gold, _chestComponent.GoldAmount);
                 _chestBuilder.RemoveChestCollider(this);
-                _chestSettings.gameObject.SetActive(false);
+                _chestComponent.gameObject.SetActive(false);
             }
 
             _computeBuffer.Release();
@@ -91,18 +110,18 @@ namespace GameInit.Chest
             _jobResult = new NativeArray<float>(1, Allocator.TempJob);
             DistanceJob distanceJob = new DistanceJob()
             {
-                ThisObjectPosition = _chestSettings.transform.position,
-                TargetObjectPosition = _heroSettings.transform.position,
+                ThisObjectPosition = _chestComponent.transform.position,
+                TargetObjectPosition = _heroComponent.transform.position,
                 Result = _jobResult
             };
             _jobHandle = distanceJob.Schedule();
             _jobHandle.Complete();
 
-            if (_jobResult[0] <= _chestSettings.ColliderRadius)
+            if (_jobResult[0] <= _chestComponent.ColliderRadius)
             {
-                _resourceManager.SetResource(ResourceType.Gold, _chestSettings.GoldAmount);
+                _resourceManager.SetResource(ResourceType.Gold, _chestComponent.GoldAmount);
                 _chestBuilder.RemoveChestCollider(this);
-                _chestSettings.gameObject.SetActive(false);
+                _chestComponent.gameObject.SetActive(false);
             }
 
             _jobResult.Dispose();
