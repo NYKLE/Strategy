@@ -20,6 +20,7 @@ namespace GameInit.Builders
         private ResourceManager _resourceManager;
         private ResourcesUIBuilder _resourcesUIBuilder;
         private ConstructionBuilder _constructionBuilder;
+        private NomadsCampBuilder _nomadsCampBuilder;
 
         private void Awake()
         {
@@ -33,8 +34,14 @@ namespace GameInit.Builders
             HeroBuilder(gameCycle);
             ChestBuilder(gameCycle, _heroBuilder.GetHeroSettings());
             ConstructionBuilder(gameCycle);
+            NomadsCampBuilder(gameCycle);
 
             Hacks();
+        }
+
+        private void NomadsCampBuilder(GameCycle cycle)
+        {
+            _nomadsCampBuilder = new NomadsCampBuilder(cycle);
         }
 
         private void ConstructionBuilder(GameCycle cycle)

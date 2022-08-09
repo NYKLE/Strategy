@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1167991207741195155}
-  - component: {fileID: 1167991207741195154}
+  - component: {fileID: 828301676121417786}
   - component: {fileID: 1167991207741195165}
   - component: {fileID: 1167991207741195164}
   - component: {fileID: 1167991207741195167}
   - component: {fileID: 1167991207741195166}
-  - component: {fileID: 1167991207741195161}
   - component: {fileID: 1167991207741195160}
   m_Layer: 0
   m_Name: unit_ Nomad
@@ -38,7 +37,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1167991207741195154
+--- !u!114 &828301676121417786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,11 +46,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1167991207741195163}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbfd1b7414eef624081ebfb36576cd07, type: 3}
+  m_Script: {fileID: 11500000, guid: aa8bd5783431db94d8c5647257553e51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 100
-  _citizenPrefab: {fileID: 1913359503768705757, guid: abe86d19d60f3184d97153a5323814c3, type: 3}
+  <CitizenPrefab>k__BackingField: {fileID: 1913359503768705757, guid: abe86d19d60f3184d97153a5323814c3, type: 3}
 --- !u!114 &1167991207741195165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +580,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1104
+  m_VersionIndex: 1107
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -667,20 +665,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167991207741195163}
-  m_Mesh: {fileID: 0}
---- !u!64 &1167991207741195161
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167991207741195163}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!195 &1167991207741195160
 NavMeshAgent:

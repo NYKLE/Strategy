@@ -47,8 +47,6 @@ public class BuildingNomadsCamp : BuildingBase
                     return;
                 }
             }
-
-            
         }
     }
 }

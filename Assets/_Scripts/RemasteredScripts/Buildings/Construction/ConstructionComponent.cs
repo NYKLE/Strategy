@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace GameInit.Component
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class ConstructionComponent : MonoBehaviour, ISelectable
     {
         [field: SerializeField] public LocalizedString BuildingName { get; private set; }
@@ -32,6 +33,8 @@ namespace GameInit.Component
             {
                 Trigger = GetComponent<Collider>();
             }
+
+            GetComponent<Rigidbody>().isKinematic = true;
         }
 
         private void Start()

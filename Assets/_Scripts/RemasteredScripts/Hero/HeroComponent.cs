@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class HeroComponent : MonoBehaviour
+public class HeroComponent : MonoBehaviour, ISelectable
 {
     public Transform Transform { get; private set; }
     public NavMeshAgent Agent { get; private set; }
@@ -23,5 +23,25 @@ public class HeroComponent : MonoBehaviour
     public Coin GetCoin()
     {
         return coin;
+    }
+
+    public void OnSelect()
+    {
+        
+    }
+
+    public void OnDeselect()
+    {
+        
+    }
+
+    private void OnEnable()
+    {
+        Events.Cursor.onDeselect += OnDeselect;
+    }
+
+    private void OnDisable()
+    {
+        Events.Cursor.onDeselect -= OnDeselect;
     }
 }

@@ -42,7 +42,7 @@ public class Cursor : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit) && !EventSystem.current.IsPointerOverGameObject())
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit, Mathf.Infinity, _raycastLayerMask, QueryTriggerInteraction.Ignore) && !EventSystem.current.IsPointerOverGameObject())
             {
                 _isDraggingMouseBox = true;
                 _dragStartPosition = Input.mousePosition;
