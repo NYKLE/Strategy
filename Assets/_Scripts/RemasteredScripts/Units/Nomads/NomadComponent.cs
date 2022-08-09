@@ -7,9 +7,11 @@ namespace GameInit.Component
     [RequireComponent(typeof(NavMeshAgent))]
     public class NomadComponent : MonoBehaviour
     {
-        [field: SerializeField] public GameObject CitizenPrefab { get; private set; }
+        //[field: SerializeField] public ObjectPoolUnity CitizenPool { get; private set; }
+        public bool IsCollided { get; private set; }
         public bool IsGoingForACoin { get; set; }
-        public Coroutine goesForACoinCoroutine { get; private set; }
+        public Coin Coin { get; private set; }
+        public Coroutine GoesForACoinCoroutine { get; set; }
 
         private NavMeshAgent _agent;
         private Renderer _renderer;
@@ -20,8 +22,9 @@ namespace GameInit.Component
             _agent = GetComponent<NavMeshAgent>();
         }
 
-        public IEnumerator GoesForACoinCoroutine(Coin coin)
+        public IEnumerator GoesForACoin(Coin coin)
         {
+            Coin = coin;
             IsGoingForACoin = true;
             _agent.SetDestination(coin.transform.position);
 
@@ -30,17 +33,17 @@ namespace GameInit.Component
                 yield return null;
             }
 
-            coin.Hide();
-            _renderer.enabled = false;
+            IsCollided = true;
 
-            yield return new WaitForSeconds(1f);
+            // coin.Hide();
+            // _renderer.enabled = false;
+            //
+            // var go = CitizenPool.Pool.Get();
+            // go.transform.position = transform.position;
+            //
+            // Destroy(gameObject);
 
-            var go = Instantiate(CitizenPrefab, transform.position, Quaternion.identity);
-
-
-            Destroy(gameObject);
-
-            goesForACoinCoroutine = null;
+            GoesForACoinCoroutine = null;
         }
     }
 }

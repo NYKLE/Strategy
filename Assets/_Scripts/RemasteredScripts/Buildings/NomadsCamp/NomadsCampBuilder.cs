@@ -1,20 +1,19 @@
 using GameInit.Component;
 using GameInit.GameCycleModule;
-using GameInit.Utility;
 using UnityEngine;
 
 namespace GameInit.Builders
 {
     public class NomadsCampBuilder
     {
-        public ObjectPoolUnity Pool { get; private set; }
-
-        private NomadsCampComponent[] _camps;
-
-
-        public NomadsCampBuilder(GameCycle cycle)
+        public NomadsCampBuilder(GameCycle cycle, CitizenPoolBuilder citizenPoolBuilder)
         {
-            _camps = Object.FindObjectsOfType<NomadsCampComponent>();
+            NomadsCampComponent[] nomadCamps = Object.FindObjectsOfType<NomadsCampComponent>();
+
+            foreach (var camp in nomadCamps)
+            {
+                var nomadBuilder = new NomadBuilder(cycle, camp, citizenPoolBuilder);
+            }
         }
     }
 }

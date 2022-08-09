@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using GameInit.Component;
 using GameInit.GameCycleModule;
 using GameInit.PoolOfCoins;
 
@@ -21,6 +22,9 @@ namespace GameInit.Builders
         private ResourcesUIBuilder _resourcesUIBuilder;
         private ConstructionBuilder _constructionBuilder;
         private NomadsCampBuilder _nomadsCampBuilder;
+        private NomadBuilder _nomadBuilder;
+        private CitizensBuilder _citizensBuilder;
+        private CitizenPoolBuilder _citizenPoolBuilder;
 
         private void Awake()
         {
@@ -34,14 +38,32 @@ namespace GameInit.Builders
             HeroBuilder(gameCycle);
             ChestBuilder(gameCycle, _heroBuilder.GetHeroSettings());
             ConstructionBuilder(gameCycle);
+            CitizenPoolBuilder();
+            CitizenBuilder(gameCycle);
             NomadsCampBuilder(gameCycle);
+
 
             Hacks();
         }
 
+        private void CitizenPoolBuilder()
+        {
+            _citizenPoolBuilder = new CitizenPoolBuilder();
+        }
+
+        private void CitizenBuilder(GameCycle cycle)
+        {
+            _citizensBuilder = new CitizensBuilder(cycle);
+        }
+
+        private void NomadBuilder(GameCycle cycle)
+        {
+            //_nomadBuilder = new NomadBuilder(cycle, _nomadsCampBuilder, _citizenPoolBuilder);
+        }
+
         private void NomadsCampBuilder(GameCycle cycle)
         {
-            _nomadsCampBuilder = new NomadsCampBuilder(cycle);
+            _nomadsCampBuilder = new NomadsCampBuilder(cycle, _citizenPoolBuilder);
         }
 
         private void ConstructionBuilder(GameCycle cycle)

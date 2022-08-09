@@ -9,15 +9,14 @@ namespace GameInit.Component
     public class NomadsCampComponent : MonoBehaviour
     {
         [field: SerializeField] public int SpawnCount { get; private set; }
-        public ObjectPoolUnity ObjectPoolUnity { get; private set; }
-
-        private List<NomadComponent> _nomads;
+        public List<NomadComponent> Nomads { get; private set; }
+        public ObjectPoolUnity NomadPool { get; set; }
 
         private void Awake()
         {
             GetComponent<Rigidbody>().isKinematic = true;
-            _nomads = new List<NomadComponent>(4);
-            ObjectPoolUnity = GetComponent<ObjectPoolUnity>();
+            Nomads = new List<NomadComponent>(4);
+            NomadPool = GetComponent<ObjectPoolUnity>();
         }
 
         private void Start()
@@ -30,8 +29,8 @@ namespace GameInit.Component
             var random = Random.Range(1, SpawnCount + 1);
             for (int i = 0; i < random; i++)
             {
-                var nomad = ObjectPoolUnity.Pool.Get();
-                _nomads.Add(nomad.GetComponent<NomadComponent>());
+                var nomad = NomadPool.Pool.Get();
+                Nomads.Add(nomad.GetComponent<NomadComponent>());
             }
         }
 
@@ -39,11 +38,11 @@ namespace GameInit.Component
         {
             if (other.TryGetComponent(out Coin coin))
             {
-                for (int i = 0; i < _nomads.Count; i++)
+                for (int i = 0; i < Nomads.Count; i++)
                 {
-                    if (_nomads[i].goesForACoinCoroutine == null && _nomads[i].IsGoingForACoin == false)
+                    if (Nomads[i].GoesForACoinCoroutine == null && Nomads[i].IsGoingForACoin == false)
                     {
-                        StartCoroutine(_nomads[i].GoesForACoinCoroutine(coin));
+                        StartCoroutine(Nomads[i].GoesForACoin(coin));
                         return;
                     }
                 }
