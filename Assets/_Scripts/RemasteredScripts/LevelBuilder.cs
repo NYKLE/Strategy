@@ -36,7 +36,7 @@ namespace GameInit.Builders
 
             HeroBuilder _heroBuilder = new HeroBuilder(gameCyrcle, _CoinPool, _resourceManager);
             ConstructionBuilder _constructionBuilder = new ConstructionBuilder(gameCyrcle, _CoinPool);
-          //  NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPoolBuilder);
+            NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPoolBuilder);
             CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle);
 
 
@@ -44,10 +44,6 @@ namespace GameInit.Builders
 
             Hacks(_resourceManager);
         }
-       /* private void NomadBuilder(GameCycle cycle)
-        {
-            //_nomadBuilder = new NomadBuilder(cycle, _nomadsCampBuilder, _citizenPoolBuilder);
-        }*/
 
         private void Hacks(ResourceManager _resourceManager)
         {

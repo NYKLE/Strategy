@@ -1,17 +1,13 @@
 using GameInit.Utility;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace GameInit.Component
 {
     [RequireComponent(typeof(ObjectPoolUnity))]
     public class CitizenPoolComponent : MonoBehaviour
     {
-        public ObjectPoolUnity Pool { get; private set; }
-
-        private void Awake()
-        {
-            Pool = GetComponent<ObjectPoolUnity>();
-        }
+        [field: SerializeField] public ObjectPoolUnity Pool { get; private set; }
     }
 }
 

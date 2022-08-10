@@ -9,18 +9,10 @@ namespace GameInit.Builders
     {
         public NomadBuilder(GameCycle cycle, NomadsCampComponent nomadsCampComponent, CitizenPoolBuilder citizenPoolBuilder)
         {
-
-            NomadComponent[] nomads = new NomadComponent[nomadsCampComponent.gameObject.transform.childCount];
-
             for (int i = 0; i < nomadsCampComponent.gameObject.transform.childCount; i++)
             {
-                nomads[i] = nomadsCampComponent.GetComponent<NomadComponent>();
-            }
-            
-
-            foreach (var nomad in nomads)
-            {
-                NomadUpdateCycle updateCycle = new NomadUpdateCycle(nomad, nomadsCampComponent, citizenPoolBuilder);
+                var nomad = nomadsCampComponent.gameObject.transform.GetChild(i).GetComponent<NomadComponent>();
+                NomadUpdateCycle updateCycle = new NomadUpdateCycle(cycle, nomad, nomadsCampComponent, citizenPoolBuilder);
                 cycle.Add(updateCycle);
             }
         }

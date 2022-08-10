@@ -7,7 +7,6 @@ namespace GameInit.Component
     [RequireComponent(typeof(NavMeshAgent))]
     public class NomadComponent : MonoBehaviour
     {
-        //[field: SerializeField] public ObjectPoolUnity CitizenPool { get; private set; }
         public bool IsCollided { get; private set; }
         public bool IsGoingForACoin { get; set; }
         public Coin Coin { get; private set; }
@@ -34,14 +33,6 @@ namespace GameInit.Component
             }
 
             IsCollided = true;
-
-            // coin.Hide();
-            // _renderer.enabled = false;
-            //
-            // var go = CitizenPool.Pool.Get();
-            // go.transform.position = transform.position;
-            //
-            // Destroy(gameObject);
 
             GoesForACoinCoroutine = null;
         }
