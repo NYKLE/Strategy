@@ -24,20 +24,19 @@ namespace GameInit.Builders
 
         private void Builders(GameCycle gameCyrcle, PrefabPoolHolder prefabHolder)
         {
-             
             Pools _CoinPool = new Pools(prefabHolder.GetCoinPrefab());
             Pools _NomandPool = new Pools(prefabHolder.GetNomandPrefab());
-
-            CitizenPoolBuilder _citizenPoolBuilder = new CitizenPoolBuilder();
+            Pools _citizenPool = new Pools(prefabHolder.GetCitizenPrefab());
 
             CameraBuilder _cameraBuilder = new CameraBuilder(gameCyrcle);
             ResourcesUIBuilder _resourcesUIBuilder = new ResourcesUIBuilder();
             ResourceManager _resourceManager = new ResourceManager(_resourcesUIBuilder);
+            DayCycleBuilder _dayCycle = new DayCycleBuilder(gameCyrcle);
 
             HeroBuilder _heroBuilder = new HeroBuilder(gameCyrcle, _CoinPool, _resourceManager);
             ConstructionBuilder _constructionBuilder = new ConstructionBuilder(gameCyrcle, _CoinPool);
-            NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPoolBuilder);
-            CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle);
+            NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPool);
+            CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle, _citizenPool);
 
 
             ChestBuilder _chestBuilder = new ChestBuilder(gameCyrcle, _heroBuilder.GetHeroSettings(), _resourceManager);

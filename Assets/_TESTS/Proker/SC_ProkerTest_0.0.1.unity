@@ -5970,6 +5970,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102726918}
   m_CullTransparentMesh: 1
+--- !u!1 &1111936870
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1111936871}
+  - component: {fileID: 1111936872}
+  m_Layer: 0
+  m_Name: DayCycle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1111936871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111936870}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.350698, y: 10.144199, z: -30.644993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1111936872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111936870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5bbb73a954c9b342ad800a5c680b738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DayLength>k__BackingField: 10
 --- !u!43 &1123467226
 Mesh:
   m_ObjectHideFlags: 0
@@ -6634,7 +6679,7 @@ GameObject:
   - component: {fileID: 1470774660}
   - component: {fileID: 1470774661}
   m_Layer: 0
-  m_Name: PoolPRefabs
+  m_Name: PoolPrefabs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6648,7 +6693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470774658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.0670114, y: 14.783261, z: -21.776815}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6669,6 +6714,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coin: {fileID: 4615295675273178629, guid: a33e0f91146211845b57853c73ae2b6c, type: 3}
   Nomand: {fileID: 1167991207741195163, guid: e622b1b0adce9d44f990c417aa029600, type: 3}
+  _citizen: {fileID: 1913359503768705757, guid: abe86d19d60f3184d97153a5323814c3, type: 3}
 --- !u!43 &1506238632
 Mesh:
   m_ObjectHideFlags: 0
@@ -7540,68 +7586,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1758872671
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1758872672}
-  - component: {fileID: 1758872674}
-  - component: {fileID: 1758872673}
-  m_Layer: 0
-  m_Name: Citizens Pool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1758872672
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1758872671}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1758872673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1758872671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0921d0944f7c23a45affa1d2e25264d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 1913359503768705757, guid: abe86d19d60f3184d97153a5323814c3, type: 3}
-  <CollectionCheck>k__BackingField: 1
-  <DefaultCapacity>k__BackingField: 50
-  <MaxSize>k__BackingField: 1000
---- !u!114 &1758872674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1758872671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61acf4d116a1ba844b1153302daa03ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Pool>k__BackingField: {fileID: 1758872673}
 --- !u!850595691 &1761517773
 LightingSettings:
   m_ObjectHideFlags: 0

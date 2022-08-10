@@ -6,6 +6,7 @@ namespace GameInit.PoolPrefabs
     {
         [SerializeField] private GameObject coin;
         [SerializeField] private GameObject Nomand;
+        [SerializeField] private GameObject _citizen;
 
         public GameObject GetCoinPrefab()
         {
@@ -14,6 +15,11 @@ namespace GameInit.PoolPrefabs
         public GameObject GetNomandPrefab()
         {
             return Nomand;
+        }
+
+        public GameObject GetCitizenPrefab()
+        {
+            return _citizen;
         }
     }
 }
