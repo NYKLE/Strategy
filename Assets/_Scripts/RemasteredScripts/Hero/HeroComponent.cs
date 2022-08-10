@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class HeroComponent : MonoBehaviour, ISelectable
+public class HeroComponent : MonoBehaviour
 {
+    [field: SerializeField] public ParticleSystem ParticleSystemMoveTo { get; private set; }
+
     public Transform Transform { get; private set; }
     public NavMeshAgent Agent { get; private set; }
     private Coin coin;
@@ -24,25 +26,5 @@ public class HeroComponent : MonoBehaviour, ISelectable
     public Coin GetCoin()
     {
         return coin;
-    }
-
-    public void OnSelect()
-    {
-        
-    }
-
-    public void OnDeselect()
-    {
-        
-    }
-
-    private void OnEnable()
-    {
-        Events.Cursor.onDeselect += OnDeselect;
-    }
-
-    private void OnDisable()
-    {
-        Events.Cursor.onDeselect -= OnDeselect;
     }
 }
