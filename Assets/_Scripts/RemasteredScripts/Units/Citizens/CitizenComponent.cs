@@ -58,6 +58,14 @@ namespace GameInit.Component
             }
         }
 
+        public void GoesForATool(Transform transform)
+        {
+            Agent.SetDestination(transform.position);
+            if(Vector3.Distance(transform.position, _coin.transform.position) <= Agent.stoppingDistance)
+            {
+
+            }
+        }
         private IEnumerator GoesForACoinCoroutine()
         {
             if (_coin != null)

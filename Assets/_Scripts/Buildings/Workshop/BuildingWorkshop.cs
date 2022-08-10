@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(SphereCollider))]
 public class BuildingWorkshop : BuildingBase, ISelectable
@@ -17,6 +18,8 @@ public class BuildingWorkshop : BuildingBase, ISelectable
 
     private int _coinsLeft;
 
+    private Dictionary<ToolType, GameObject> tools = new Dictionary<ToolType, GameObject>();
+
     private SphereCollider _coinTrigger;
     
     private void Awake()
@@ -33,15 +36,19 @@ public class BuildingWorkshop : BuildingBase, ISelectable
             {
                 case ToolType.Pitchfork:
                     tool = Instantiate(_pitchforkPrefab, transform.position, Quaternion.identity);
+                    tools.Add(ToolType.Pitchfork, tool);
                     break;
                 case ToolType.Hammer:
                     tool = Instantiate(_hammerPrefab, transform.position, Quaternion.identity);
+                    tools.Add(ToolType.Hammer, tool);
                     break;
                 case ToolType.Sword:
                     tool = Instantiate(_swordPrefab, transform.position, Quaternion.identity);
+                    tools.Add(ToolType.Sword, tool);
                     break;
                 case ToolType.Bow:
                     tool = Instantiate(_bowPrefab, transform.position, Quaternion.identity);
+                    tools.Add(ToolType.Bow, tool);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -51,6 +58,15 @@ public class BuildingWorkshop : BuildingBase, ISelectable
         }
     }
 
+    public bool GetTools(out Dictionary<ToolType, GameObject> dictionary)
+    {
+        dictionary = tools;
+        if(dictionary.Count != 0)
+        {
+            return true;
+        }
+        return false;
+    }
     public void OnSelect()
     {
         _canvas.enabled = true;

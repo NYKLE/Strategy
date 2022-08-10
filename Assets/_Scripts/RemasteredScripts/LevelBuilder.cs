@@ -38,6 +38,7 @@ namespace GameInit.Builders
             NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPool);
             CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle, _citizenPool);
 
+            ToolsBuilder toolsBuilder = new ToolsBuilder(gameCyrcle, _citizenPool);
 
             ChestBuilder _chestBuilder = new ChestBuilder(gameCyrcle, _heroBuilder.GetHeroSettings(), _resourceManager);
 

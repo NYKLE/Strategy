@@ -12,7 +12,8 @@ namespace GameInit.Builders
         {
             foreach (var citizen in pool._pool)
             {
-                CitizenComponent citizenComponent = citizen.GetComponent<CitizenComponent>();
+                
+                 CitizenComponent citizenComponent = citizen.GetComponent<CitizenComponent>();
                 var citizenCoinPicker = new CitizenCoinPicker(citizenComponent, pool);
                 cycle.Add(citizenCoinPicker);
             }
