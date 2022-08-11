@@ -52,6 +52,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HealthMax>k__BackingField: 100
   <HealthCurrent>k__BackingField: 100
+  <State>k__BackingField: 0
+  <FarmersMaxCanHave>k__BackingField: 3
+  <FarmersCurrentHave>k__BackingField: 0
 --- !u!114 &6344559163345133948
 MonoBehaviour:
   m_ObjectHideFlags: 0

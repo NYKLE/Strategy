@@ -9,12 +9,14 @@ namespace GameInit.Component
     [RequireComponent(typeof(Rigidbody))]
     public class ConstructionComponent : MonoBehaviour, ISelectable
     {
-        [field: SerializeField] public LocalizedString BuildingName { get; private set; }
-        [field: SerializeField] public GameObject BuildingToBuild { get; private set; }
-        [field: SerializeField] public Collider Trigger { get; private set; }
+        [field: SerializeField] public BuildingType BuildingType { get; private set; }
+        //[field: SerializeField] public LocalizedString BuildingName { get; private set; }
+        [field: SerializeField] public GameObject BuildingPrefab { get; private set; }
         [field: SerializeField] public float ConstructionTime { get; private set; }
         [field: SerializeField] public int GoldNeededToBuild { get; private set; }
         [field: SerializeField] public float ColliderRadius { get; private set; }
+        public Collider Trigger { get; private set; }
+        public bool IsFinishBuilding { get; private set; }
 
         [field: SerializeField] public Canvas CanvasMain { get; private set; }
         [field: SerializeField] public TMP_Text GoldLeftText { get; private set; }
@@ -24,6 +26,7 @@ namespace GameInit.Component
         [field: SerializeField] public Image ProgressBar { get; private set; }
 
         private Coroutine _coroutine;
+        private WaitForEndOfFrame _waitForEndOfFrame;
         private float _constructionProgressCurrent;
         private bool _isSelectable = true;
 
@@ -40,7 +43,7 @@ namespace GameInit.Component
         private void Start()
         {
             GoldLeftText.text = GoldNeededToBuild.ToString();
-            BuildingNameText.text = BuildingName.GetLocalizedString();
+            //BuildingNameText.text = BuildingName.GetLocalizedString();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -78,12 +81,15 @@ namespace GameInit.Component
 
             ProgressBar.enabled = false;
 
-            BuildingToBuild.SetActive(true);
-            // var siblingIndex = transform.GetSiblingIndex();
-            // var go = Instantiate(PrefabToBuild, transform.position, Quaternion.identity);
-            // go.transform.SetSiblingIndex(siblingIndex);
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
+            //var go = Instantiate(BuildingPrefab, gameObject.transform.position, Quaternion.identity);
+            //BuildingToBuild.SetActive(true);
+
+            IsFinishBuilding = true;
+
+            yield return _waitForEndOfFrame;
+
+            Destroy(gameObject);
+            //gameObject.SetActive(false);
 
             _coroutine = null;
         }

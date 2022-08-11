@@ -2,6 +2,7 @@ using GameInit.Component;
 using GameInit.Construction;
 using GameInit.GameCycleModule;
 using GameInit.Pool;
+using GameInit.Utility;
 using UnityEngine;
 
 namespace GameInit.Builders
@@ -9,22 +10,19 @@ namespace GameInit.Builders
     public class ConstructionBuilder
     {
         private ConstructionComponent[] _constructionComponent;
-        private GameCycle _cycle;
 
-        public ConstructionBuilder(GameCycle cycle, Pools coinPool)
+        public ConstructionBuilder(GameCycle cycle, Pools coinPool, SpawnBuildingRegistration registration)
         {
             _constructionComponent = Object.FindObjectsOfType<ConstructionComponent>();
 
             foreach (var constructionComponent in _constructionComponent)
             {
                 ConstructionCoinCollector constructionCoinCollector = new ConstructionCoinCollector(coinPool, this, constructionComponent);
-                cycle.Add(constructionCoinCollector);
-            }
-        }
+                ConstructionFinishBuilding finishBuilding = new ConstructionFinishBuilding(cycle, constructionComponent, registration);
 
-        public void RemoveCollider(IUpdate update)
-        {
-            _cycle.Remove(update);
+                cycle.Add(constructionCoinCollector);
+                cycle.Add(finishBuilding);
+            }
         }
     }
 }

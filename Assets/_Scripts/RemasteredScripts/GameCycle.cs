@@ -69,7 +69,7 @@ namespace GameInit.GameCycleModule
             // ====== TEST ======
             foreach (var update in _updates.ToArray())
             {
-                update.OnUpdate();
+                update?.OnUpdate();
             }
             // ==================
         }

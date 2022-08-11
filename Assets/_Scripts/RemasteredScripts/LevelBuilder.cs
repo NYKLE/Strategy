@@ -4,6 +4,7 @@ using System;
 using GameInit.GameCycleModule;
 using GameInit.Pool;
 using GameInit.PoolPrefabs;
+using GameInit.Utility;
 
 namespace GameInit.Builders
 {
@@ -28,14 +29,17 @@ namespace GameInit.Builders
             Pools _NomandPool = new Pools(prefabHolder.GetNomandPrefab());
             Pools _citizenPool = new Pools(prefabHolder.GetCitizenPrefab());
 
+            SpawnBuildingRegistration _spawnBuildingRegistration = new SpawnBuildingRegistration(gameCyrcle);
+            BuildingBuilder _buildingBuilder = new BuildingBuilder(gameCyrcle);
+
             CameraBuilder _cameraBuilder = new CameraBuilder(gameCyrcle);
             ResourcesUIBuilder _resourcesUIBuilder = new ResourcesUIBuilder();
             ResourceManager _resourceManager = new ResourceManager(_resourcesUIBuilder);
             DayCycleBuilder _dayCycle = new DayCycleBuilder(gameCyrcle);
 
             HeroBuilder _heroBuilder = new HeroBuilder(gameCyrcle, _CoinPool, _resourceManager);
-            ConstructionBuilder _constructionBuilder = new ConstructionBuilder(gameCyrcle, _CoinPool);
-            FarmsBuilder farmsBuilder = new FarmsBuilder(gameCyrcle, _dayCycle.DayCycle);
+            ConstructionBuilder _constructionBuilder = new ConstructionBuilder(gameCyrcle, _CoinPool, _spawnBuildingRegistration);
+            //FarmsBuilder farmsBuilder = new FarmsBuilder(gameCyrcle, _dayCycle.DayCycle);
             NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPool);
             CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle, _citizenPool);
 

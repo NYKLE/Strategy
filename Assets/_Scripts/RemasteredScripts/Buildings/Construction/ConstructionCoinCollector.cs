@@ -32,7 +32,7 @@ namespace GameInit.Construction
 
             if (_constructionComponent.GoldNeededToBuild == 0)
             {
-                Debug.Log("Build Prefab");
+                // Building
             }
         }
 
