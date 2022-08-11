@@ -10,7 +10,7 @@ namespace GameInit.Component
     public class ConstructionComponent : MonoBehaviour, ISelectable
     {
         [field: SerializeField] public LocalizedString BuildingName { get; private set; }
-        [field: SerializeField] public GameObject PrefabToBuild { get; private set; }
+        [field: SerializeField] public GameObject BuildingToBuild { get; private set; }
         [field: SerializeField] public Collider Trigger { get; private set; }
         [field: SerializeField] public float ConstructionTime { get; private set; }
         [field: SerializeField] public int GoldNeededToBuild { get; private set; }
@@ -78,10 +78,12 @@ namespace GameInit.Component
 
             ProgressBar.enabled = false;
 
-            var siblingIndex = transform.GetSiblingIndex();
-            var go = Instantiate(PrefabToBuild, transform.position, Quaternion.identity);
-            go.transform.SetSiblingIndex(siblingIndex);
-            Destroy(gameObject);
+            BuildingToBuild.SetActive(true);
+            // var siblingIndex = transform.GetSiblingIndex();
+            // var go = Instantiate(PrefabToBuild, transform.position, Quaternion.identity);
+            // go.transform.SetSiblingIndex(siblingIndex);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
 
             _coroutine = null;
         }

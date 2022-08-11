@@ -35,6 +35,7 @@ namespace GameInit.Builders
 
             HeroBuilder _heroBuilder = new HeroBuilder(gameCyrcle, _CoinPool, _resourceManager);
             ConstructionBuilder _constructionBuilder = new ConstructionBuilder(gameCyrcle, _CoinPool);
+            FarmsBuilder farmsBuilder = new FarmsBuilder(gameCyrcle, _dayCycle.DayCycle);
             NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPool);
             CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle, _citizenPool);
 

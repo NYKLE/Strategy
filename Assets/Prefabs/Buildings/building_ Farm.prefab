@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8259353376485998197}
+  - component: {fileID: 8255844145413121836}
   - component: {fileID: 6344559163345133948}
   - component: {fileID: 9147324911162013559}
   - component: {fileID: 7885656127101900515}
@@ -37,7 +38,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6344559163345133948
+--- !u!114 &8255844145413121836
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,6 +46,20 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4898188938488833570}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef3967564768f847bbd5286caa8655b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HealthMax>k__BackingField: 100
+  <HealthCurrent>k__BackingField: 100
+--- !u!114 &6344559163345133948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898188938488833570}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 684ca3056688ccc42a05ed96b027e1d4, type: 3}
   m_Name: 
@@ -229,7 +244,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 991
+  m_VersionIndex: 997
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
