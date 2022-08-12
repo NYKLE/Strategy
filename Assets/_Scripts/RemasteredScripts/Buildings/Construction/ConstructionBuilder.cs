@@ -11,14 +11,14 @@ namespace GameInit.Builders
     {
         private ConstructionComponent[] _constructionComponent;
 
-        public ConstructionBuilder(GameCycle cycle, Pools coinPool, SpawnBuildingRegistration registration)
+        public ConstructionBuilder(GameCycle cycle, Pools coinPool)
         {
             _constructionComponent = Object.FindObjectsOfType<ConstructionComponent>();
 
             foreach (var constructionComponent in _constructionComponent)
             {
                 ConstructionCoinCollector constructionCoinCollector = new ConstructionCoinCollector(coinPool, this, constructionComponent);
-                ConstructionFinishBuilding finishBuilding = new ConstructionFinishBuilding(cycle, constructionComponent, registration);
+                ConstructionFinishBuilding finishBuilding = new ConstructionFinishBuilding(cycle, constructionComponent);
 
                 cycle.Add(constructionCoinCollector);
                 cycle.Add(finishBuilding);

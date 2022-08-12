@@ -12,15 +12,11 @@ namespace GameInit.Construction
     {
         private GameCycle _cycle;
         private ConstructionComponent _component;
-        private SpawnBuildingRegistration _registration;
-        private BuildingBuilder _buildingBuilder;
 
-        public ConstructionFinishBuilding(GameCycle cycle, ConstructionComponent component, SpawnBuildingRegistration registration, BuildingBuilder buildingBuilder)
+        public ConstructionFinishBuilding(GameCycle cycle, ConstructionComponent component)
         {
             _cycle = cycle;
             _component = component;
-            _registration = registration;
-            _buildingBuilder = buildingBuilder;
         }
 
         public void OnUpdate()
@@ -28,8 +24,6 @@ namespace GameInit.Construction
             if (_component.IsFinishBuilding)
             {
                 GameObject go = Object.Instantiate(_component.BuildingPrefab, _component.gameObject.transform.position, Quaternion.identity);
-                _buildingBuilder.
-                _registration.Add(_component.BuildingType, go);
                 _cycle.Remove(this);
             }
         }
