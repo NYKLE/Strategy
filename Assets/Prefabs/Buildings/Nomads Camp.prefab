@@ -9,14 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6729712010392356530}
-  - component: {fileID: 6729712010392356522}
-  - component: {fileID: 6729712010392356521}
   - component: {fileID: 6729712010392356531}
   - component: {fileID: 6729712010392356532}
   - component: {fileID: 6729712010392356533}
   - component: {fileID: 6729712010392356534}
   - component: {fileID: 6729712010392356528}
-  - component: {fileID: 6729712010392356523}
+  - component: {fileID: 2188707008290353307}
   m_Layer: 0
   m_Name: Nomads Camp
   m_TagString: Untagged
@@ -39,35 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6729712010392356522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6729712010392356520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7def0e0882737d144b89e52a30a557df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <SpawnCount>k__BackingField: 4
---- !u!114 &6729712010392356521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6729712010392356520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0921d0944f7c23a45affa1d2e25264d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Prefab>k__BackingField: {fileID: 1167991207741195163, guid: e622b1b0adce9d44f990c417aa029600, type: 3}
-  <CollectionCheck>k__BackingField: 1
-  <DefaultCapacity>k__BackingField: 4
-  <MaxSize>k__BackingField: 16
 --- !u!114 &6729712010392356531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11720,19 +11689,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 15
   m_Center: {x: 0.2500062, y: 0.250005, z: 0.0000009536743}
---- !u!54 &6729712010392356523
-Rigidbody:
+--- !u!114 &2188707008290353307
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6729712010392356520}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbeb32fdbd253294e92a7e475c28e238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCount: 5
+  curCount: 0
+  trans: {fileID: 6729712010392356530}

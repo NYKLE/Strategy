@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1913359503768705748}
-  - component: {fileID: 3983123888405870309}
   - component: {fileID: 1913359503768705755}
   - component: {fileID: 1913359503768705754}
   - component: {fileID: 1913359503768705753}
@@ -17,6 +16,7 @@ GameObject:
   - component: {fileID: 1913359503768705758}
   - component: {fileID: 635888338}
   - component: {fileID: -338495228730709017}
+  - component: {fileID: 942097559354613875}
   m_Layer: 0
   m_Name: unit_ Citizen
   m_TagString: Untagged
@@ -39,19 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3983123888405870309
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913359503768705757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee4ddcd07ec1ef45add5d49ee0db3a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <CoinMaxCanHave>k__BackingField: 5
 --- !u!114 &1913359503768705755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,3 +706,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &942097559354613875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913359503768705757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711a44661a422e1489e9d51e2233bd48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

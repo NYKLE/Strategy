@@ -23,14 +23,14 @@ namespace GameInit.Citizen
 
         public void OnUpdate()
         {
-            foreach (var citizen in citizens)
+            /*foreach (var citizen in citizens)
             {
                 //if (citizen.IsGoingForACoin == false && citizen.IsCoinsInRadius) 
                 if (citizen.IsCoinsInRadius && citizen.IsGoingForACoin == false)
                 {
                     citizen.GoesForACoin();
                 }
-            }
+            }*/
         }
     }
 }
