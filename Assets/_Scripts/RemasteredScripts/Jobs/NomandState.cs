@@ -7,6 +7,10 @@ namespace GameInit.Job
 {
     public class NomandState : IJob
     {
+        public NomandState()
+        {
+            Enter();
+        }
         public void Enter()
         {
             Debug.Log("First State");

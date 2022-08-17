@@ -7,16 +7,22 @@ using GamePlay.Units;
 using GamePlay.NomandsCamp;
 using System;
 using GameInit.Job;
+using GameInit.GameCycleModule;
+using GameInit.Pool;
 
 namespace GamePlay.SpawnUnits
 {
     public class UnitsSpawner : IDayChange
     {
         private NomandCampCreater nomandCampCreater;
-        UnitsSettingsComponent unitsSettingsComponent;
-        List<IDisposable> dispose;
-        public UnitsSpawner(UnitsSettingsComponent _unitsSettingsComponent, NomandCampCreater _nomandCampCreater, List<IDisposable> _dispose)
+        private UnitsSettingsComponent unitsSettingsComponent;
+        private List<IDisposable> dispose;
+        private GameCycle cyrcle;
+        private Pools CoinPool;
+        public UnitsSpawner(UnitsSettingsComponent _unitsSettingsComponent, NomandCampCreater _nomandCampCreater, List<IDisposable> _dispose, GameCycle _cyrcle, Pools _CoinPool)
         {
+            CoinPool = _CoinPool;
+            cyrcle = _cyrcle;
             dispose = _dispose;
             nomandCampCreater = _nomandCampCreater;
             unitsSettingsComponent = _unitsSettingsComponent;
@@ -29,8 +35,8 @@ namespace GamePlay.SpawnUnits
             {
                 for (int i = 0; i < camp.GetMaxCount(); i++)
                 {
-                    var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp);
-                    AI.StateChange(new NomandState());
+                    var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool);
+                    camp.AddCount();
                     dispose.Add(AI);
                 }
             }
@@ -44,8 +50,8 @@ namespace GamePlay.SpawnUnits
                 {
                     if (camp.CanAdd())
                     {
-                        var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp);
-                        AI.StateChange(new NomandState());
+                        var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool);
+                        camp.AddCount();
                         dispose.Add(AI);
                     }
                 }

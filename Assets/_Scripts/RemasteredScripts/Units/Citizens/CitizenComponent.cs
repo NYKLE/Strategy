@@ -41,14 +41,14 @@ namespace GameInit.Component
             }
         }
 
-        // private void OnTriggerExit(Collider other)
-        // {
-        //     if (other.TryGetComponent(out Coin coin))
-        //     {
-        //         IsCoinsInRadius = false;
-        //         _coin = null;
-        //     }
-        // }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent(out Coin coin))
+             {
+                 IsCoinsInRadius = false;
+                 _coin = null;
+             }
+        }
 
         public void GoesForACoin()
         {

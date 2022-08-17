@@ -123,7 +123,7 @@ namespace GameInit.Pool
             {
                 return gameObj;
             }
-            throw new Exception("Pool is over!");
+            return null;
         }
     }
 }

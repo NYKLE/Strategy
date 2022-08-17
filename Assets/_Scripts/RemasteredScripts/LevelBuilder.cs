@@ -33,7 +33,7 @@ namespace GameInit.Builders
 
             //SpawnBuildingRegistration _spawnBuildingRegistration = new SpawnBuildingRegistration(gameCyrcle);
             NomandCampCreater nomandCampCreater = new NomandCampCreater();
-            UnitsBuilder UnitsBuilder = new UnitsBuilder(gameCyrcle, nomandCampCreater, _dispose);
+            UnitsBuilder UnitsBuilder = new UnitsBuilder(gameCyrcle, nomandCampCreater, _dispose, _CoinPool);
             BuildingBuilder _buildingBuilder = new BuildingBuilder(gameCyrcle);
 
             CameraBuilder _cameraBuilder = new CameraBuilder(gameCyrcle);
