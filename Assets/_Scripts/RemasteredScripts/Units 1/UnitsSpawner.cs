@@ -35,9 +35,8 @@ namespace GamePlay.SpawnUnits
             {
                 for (int i = 0; i < camp.GetMaxCount(); i++)
                 {
-                    var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool);
+                    var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool, dispose);
                     camp.AddCount();
-                    dispose.Add(AI);
                 }
             }
         }
@@ -50,9 +49,8 @@ namespace GamePlay.SpawnUnits
                 {
                     if (camp.CanAdd())
                     {
-                        var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool);
+                        var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool, dispose);
                         camp.AddCount();
-                        dispose.Add(AI);
                     }
                 }
             }
