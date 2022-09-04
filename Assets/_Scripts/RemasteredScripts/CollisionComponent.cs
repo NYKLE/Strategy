@@ -13,9 +13,4 @@ public class CollisionComponent : MonoBehaviour
            OnEnter.Invoke(other);
         }
     }
-    
-    public void AddAction(Action _collectCoin)
-    {
-        collectCoin = _collectCoin;
-    }
 }
