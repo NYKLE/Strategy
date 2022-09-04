@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using GameInit.Settings;
+using GameInit.ConnectBuildings;
+using GameInit.Buildings;
 
 namespace GamePlay.WorkShop
 {
@@ -12,9 +14,11 @@ namespace GamePlay.WorkShop
         private Dictionary<WorkShopTypes, IWorshopState> statePlaceDictionary;
         private Dictionary<WorkShopTypes, IWorshopState> stateBuildDictionary;
         private WorkShopSettings workShopSettings;
-        public WorkShop(WorkShopSettings _workShopSettings, WorkShopTypes _type, ToolsPrefabs tools)
+        private ConnectionsBuildings connectionsBuildings;
+        public WorkShop(WorkShopSettings _workShopSettings, WorkShopTypes _type, ToolsPrefabs tools, ConnectionsBuildings _connectionsBuildings)
         {
             type = _type;
+            connectionsBuildings = _connectionsBuildings;
             workShopSettings = _workShopSettings;
             PlaceByType();
             BuildByType(tools);
@@ -29,7 +33,7 @@ namespace GamePlay.WorkShop
         private void BuildByType(ToolsPrefabs tools)
         {
             stateBuildDictionary = new Dictionary<WorkShopTypes, IWorshopState>();
-            stateBuildDictionary.Add(WorkShopTypes.hammer, new WorkShopWithHammerBuild(tools));
+            stateBuildDictionary.Add(WorkShopTypes.hammer, new WorkShopWithHammerBuild(tools, connectionsBuildings));
         }
         public void SelectPlaceType()
         {

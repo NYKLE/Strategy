@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameInit.ConnectBuildings;
 
 namespace GamePlay.WorkShop
 {
@@ -9,9 +10,10 @@ namespace GamePlay.WorkShop
         private int coinsToBuild;
         private WorkShop workShop;
         private WorkShopSettings workShopSettings;
+        private ConnectionsBuildings connectionsBuildings;
 
         private const int needCoinsToBuild = 5;
-        
+      
         public void Enter(WorkShopSettings _workShopSettings, WorkShop _workShop)
         {
             workShop = _workShop;

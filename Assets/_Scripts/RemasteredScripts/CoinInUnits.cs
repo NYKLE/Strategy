@@ -5,6 +5,7 @@ using GameInit.Pool;
 using System;
 using UnityEngine.AI;
 using GameInit.Job;
+using GameInit.ConnectBuildings;
 
 
 namespace GamePlay.CoinsInUnits
@@ -21,8 +22,10 @@ namespace GamePlay.CoinsInUnits
         private GameObject prefab;
         private NavMeshAgent navMesh;
         private IJob State;
-        public CoinInUnits(int _coins, int _maxCoins, Pools _CoinPool, GameObject _prefab, IJob _State)
+        private ConnectionsBuildings connectionsBuildings;
+        public CoinInUnits(int _coins, int _maxCoins, Pools _CoinPool, GameObject _prefab, IJob _State, ConnectionsBuildings _connectionsBuildings)
         {
+            connectionsBuildings = _connectionsBuildings;
             State = _State;
             prefab = _prefab;
             navMesh = prefab.GetComponent<NavMeshAgent>();
@@ -79,7 +82,9 @@ namespace GamePlay.CoinsInUnits
             col.gameObject.GetComponent<Coin>().Hide();
             if (coins == 1)
             {
-                State = new CitizenState();
+                var citizen = new CitizenState(prefab, navMesh);
+                State = citizen;
+                connectionsBuildings.getConnectionsWorkShop().addUnits(citizen);
             }
         }
         public void OnUpdate()
