@@ -1,31 +1,30 @@
+using System.Collections;
 using System.Collections.Generic;
-using GameInit.Component;
-using GameInit.GameCycleModule;
 using UnityEngine;
+using GameInit.Settings;
+using GamePlay.WorkShop;
+using GameInit.GameCyrcleModule;
+using GameInit.ConnectBuildings;
+
 
 namespace GameInit.Builders
 {
-    public class BuildingBuilder
+    public class BuildingsBuilder
     {
-        public List<object> Farm { get; private set; }
-        public List<WorkshopComponent> Workshop { get; private set; }
-
-        private GameCycle _cycle;
-
-        public BuildingBuilder(GameCycle cycle)
+        public BuildingsBuilder(GameCyrcle cycle, ConnectionsBuildings connectionsBuildings)
         {
-            Farm = new List<object>(32);
-            Workshop = new List<WorkshopComponent>(32);
+            var prefabs = GameObject.FindObjectsOfType<WorkShopSettingsComponent>(); 
+            var tools = GameObject.FindObjectOfType<ToolsPrefabsComponent>();
+            WorkShopWithHammerBuild(prefabs, tools, connectionsBuildings);
         }
 
-        public void Add(FarmComponent farm)
-        {
-            Farm.Add(farm);
-        }
 
-        public void Add(WorkshopComponent workshop)
+        private void WorkShopWithHammerBuild(WorkShopSettingsComponent[] prefabs, ToolsPrefabsComponent tools, ConnectionsBuildings connectionsBuildings)
         {
-            Workshop.Add(workshop);
+            foreach (var workShopSettingsComponent in prefabs)
+            {
+                new WorkShop(workShopSettingsComponent, workShopSettingsComponent.getType(), tools, connectionsBuildings);
+            }
         }
     }
 }

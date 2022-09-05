@@ -6,12 +6,10 @@ using GameInit.Builders;
 public class ResourceManager
 {
     private Dictionary<ResourceType, int> _resources;
-    private ResourcesUIBuilder _resourcesUIBuilder;
+    
 
-    public ResourceManager(ResourcesUIBuilder resourcesUIBuilder)
+    public ResourceManager( )
     {
-        _resourcesUIBuilder = resourcesUIBuilder;
-
         _resources = new Dictionary<ResourceType, int>();
         foreach (var resType in Enum.GetNames(typeof(ResourceType)))
         {
@@ -39,7 +37,7 @@ public class ResourceManager
             }
         }
 
-        _resourcesUIBuilder.UpdateUI(GetResource(ResourceType.Gold).ToString());
+        
         System.Console.WriteLine("resourse " + _resources[type]);
     }
 }

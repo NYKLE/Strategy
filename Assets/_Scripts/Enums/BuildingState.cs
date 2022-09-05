@@ -1,4 +1,4 @@
-public enum BuildingState
+public enum Buildingstate
 {
     Full,
     Broken,

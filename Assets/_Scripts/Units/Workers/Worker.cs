@@ -7,7 +7,7 @@ public class Worker : MonoBehaviour, ISelectable
 {
     public static Action<GameObject> OnReleaseWorker;
 
-    [SerializeField] private WorkerState _state;
+    [SerializeField] private Workerstate _state;
 
     private NavMeshAgent _agent;
     private ResourceZone _zone;
@@ -26,7 +26,7 @@ public class Worker : MonoBehaviour, ISelectable
         _isReachedDestination = false;
 
         _agent.SetDestination(destination);
-        SetState(WorkerState.Walking);
+        Setstate(Workerstate.Walking);
     }
 
     public void ReturnWorker(Vector3 ratusha, ResourceZone zone)
@@ -38,15 +38,15 @@ public class Worker : MonoBehaviour, ISelectable
 
         _agent.SetDestination(ratusha);
 
-        SetState(WorkerState.Returning);
+        Setstate(Workerstate.Returning);
     }
 
-    public void SetState(WorkerState state)
+    public void Setstate(Workerstate state)
     {
         _state = state;
     }
 
-    public WorkerState GetState()
+    public Workerstate Getstate()
     {
         return _state;
     }
@@ -66,7 +66,7 @@ public class Worker : MonoBehaviour, ISelectable
                 {
                     if (_isReachedDestination == false)
                     {
-                        SetState(WorkerState.Free);
+                        Setstate(Workerstate.Free);
 
                         _zone = null;
 
@@ -78,7 +78,7 @@ public class Worker : MonoBehaviour, ISelectable
                 else
                 {
                     _isReturning = true;
-                    SetState(WorkerState.Returning);
+                    Setstate(Workerstate.Returning);
 
                     _isReachedDestination = false;
                 }
@@ -89,7 +89,7 @@ public class Worker : MonoBehaviour, ISelectable
                 {
                     if (_isReachedDestination == false)
                     {
-                        SetState(WorkerState.Working);
+                        Setstate(Workerstate.Working);
 
                         gameObject.SetActive(false);
 
@@ -98,7 +98,7 @@ public class Worker : MonoBehaviour, ISelectable
                 }
                 else
                 {
-                    SetState(WorkerState.Walking);
+                    Setstate(Workerstate.Walking);
 
                     _isReachedDestination = false;
                 }
@@ -106,12 +106,12 @@ public class Worker : MonoBehaviour, ISelectable
         }
         if (hit.point != Vector3.zero)
         {
-            SetState(WorkerState.Walking);
+            Setstate(Workerstate.Walking);
             _agent.SetDestination(hit.point);
         }
         else
         {
-            SetState(WorkerState.Waiting);
+            Setstate(Workerstate.Waiting);
         }
     }
     public void MoveToPos(RaycastHit _hit)

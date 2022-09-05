@@ -1,12 +1,12 @@
 using UnityEngine;
-using GameInit.GameCycleModule;
+using GameInit.GameCyrcleModule;
 
 
 namespace GameInit.Camera
 {
 	public class CameraMove : IUpdate
 	{
-		private CameraSettings settings;
+		private CameraSettingsComponent settings;
 		
 		private Vector3 offset;
 		private Vector3 lastPos = Vector3.zero;
@@ -17,7 +17,7 @@ namespace GameInit.Camera
 
 		private const int constY = 0;
 
-		public CameraMove(CameraSettings _settings, Transform _cameraTransform)
+		public CameraMove(CameraSettingsComponent _settings, Transform _cameraTransform)
 		{
 			settings = _settings;
 			cameraTransform = _cameraTransform;

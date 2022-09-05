@@ -1,6 +1,6 @@
 using UnityEngine;
 using GameInit.Pool;
-using GameInit.GameCycleModule;
+using GameInit.GameCyrcleModule;
 using System.Threading.Tasks;
 using System;
 

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Military : MonoBehaviour, ISelectable, IMoveable
 {
-    [SerializeField] private MillitaryState _state;
+    [SerializeField] private Millitarystate _state;
 
     [SerializeField] private SpriteRenderer _selectedSprite;
 
@@ -29,15 +29,15 @@ public class Military : MonoBehaviour, ISelectable, IMoveable
         _isReachedDestination = false;
 
         _agent.SetDestination(destination);
-        SetState(MillitaryState.Walking);
+        Setstate(Millitarystate.Walking);
     }
 
-    public void SetState(MillitaryState state)
+    public void Setstate(Millitarystate state)
     {
         _state = state;
     }
 
-    public MillitaryState GetState()
+    public Millitarystate Getstate()
     {
         return _state;
     }
@@ -46,12 +46,12 @@ public class Military : MonoBehaviour, ISelectable, IMoveable
     {
         if (hit.point != null)
         {
-            SetState(MillitaryState.Walking);
+            Setstate(Millitarystate.Walking);
             _agent.SetDestination(hit.point);
         }
         else
         {
-            SetState(MillitaryState.Waiting);
+            Setstate(Millitarystate.Waiting);
         }
     }
 

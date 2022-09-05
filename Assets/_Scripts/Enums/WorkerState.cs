@@ -1,4 +1,4 @@
-public enum WorkerState
+public enum Workerstate
 {
     Free,
     Walking,
@@ -6,7 +6,7 @@ public enum WorkerState
     Waiting,
     Returning
 }
-public enum MillitaryState
+public enum Millitarystate
 {
     Free,
     Walking,

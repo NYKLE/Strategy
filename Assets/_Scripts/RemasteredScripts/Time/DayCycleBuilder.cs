@@ -1,5 +1,5 @@
 using GameInit.Component;
-using GameInit.GameCycleModule;
+using GameInit.GameCyrcleModule;
 using GameInit.TimeCycle;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace GameInit.Builders
     {
         public DayCycle DayCycle { get; private set; }
 
-        public DayCycleBuilder(GameCycle cycle)
+        public DayCycleBuilder(GameCyrcle cycle)
         {
             var dayCycle = Object.FindObjectOfType<DayCycleComponent>();
 

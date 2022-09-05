@@ -5,17 +5,17 @@ using UnityEngine;
 
 namespace GameInit.Job
 {
-    public class Nomandstate : IJob
+    public class NomandState : IJob
     {
         private GameObject prefab;
-        public Nomandstate(GameObject _prefab)
+        public NomandState(GameObject _prefab)
         {
             prefab = _prefab;
             Enter();
         }
         public void Enter()
         {
-            Debug.Log("First state");
+            Debug.Log("First State");
         }
 
         public Vector3 getPosition()
