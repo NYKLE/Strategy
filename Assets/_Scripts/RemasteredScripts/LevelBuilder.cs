@@ -6,6 +6,7 @@ using GameInit.Pool;
 using GameInit.PoolPrefabs;
 using GameInit.NomandCam;
 using GameInit.UnitsBuilderCreater;
+using GameInit.ConnectBuildings;
 using GameInit.Utility;
 
 namespace GameInit.Builders
@@ -32,8 +33,11 @@ namespace GameInit.Builders
             Pools _citizenPool = new Pools(prefabHolder.GetCitizenPrefab());
 
             //SpawnBuildingRegistration _spawnBuildingRegistration = new SpawnBuildingRegistration(gameCyrcle);
+            ConnectionsBuildings connectionsBuildings = new ConnectionsBuildings(_dispose);
+
             NomandCampCreater nomandCampCreater = new NomandCampCreater();
-            UnitsBuilder UnitsBuilder = new UnitsBuilder(gameCyrcle, nomandCampCreater, _dispose, _CoinPool);
+            UnitsBuilder UnitsBuilder = new UnitsBuilder(gameCyrcle, nomandCampCreater, _dispose, _CoinPool, connectionsBuildings);
+            BuildingsBuilder buildingsBuilder = new BuildingsBuilder(gameCyrcle, connectionsBuildings);
             BuildingBuilder _buildingBuilder = new BuildingBuilder(gameCyrcle);
 
             CameraBuilder _cameraBuilder = new CameraBuilder(gameCyrcle);

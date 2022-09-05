@@ -5,12 +5,13 @@ using GameInit.Pool;
 using System;
 using UnityEngine.AI;
 using GameInit.Job;
+using GameInit.ConnectBuildings;
 
 
 namespace GamePlay.CoinsInUnits
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class CoinInUnits : IUpdate
+    public class CoinInUnits : IUpdate, IDisposable
     {
         public bool IsGoingForACoin { get; private set; }
         
@@ -21,13 +22,16 @@ namespace GamePlay.CoinsInUnits
         private GameObject prefab;
         private NavMeshAgent navMesh;
         private IJob State;
-        public CoinInUnits(CollisionComponent _collisionComponent, int _coins, int _maxCoins, Pools _CoinPool, GameObject _prefab, IJob _State)
+        private ConnectionsBuildings connectionsBuildings;
+        public CoinInUnits(int _coins, int _maxCoins, Pools _CoinPool, GameObject _prefab, IJob _State, ConnectionsBuildings _connectionsBuildings)
         {
+            connectionsBuildings = _connectionsBuildings;
             State = _State;
             prefab = _prefab;
             navMesh = prefab.GetComponent<NavMeshAgent>();
             CoinPool = _CoinPool;
-            collisionComponent = _collisionComponent;
+            collisionComponent = _prefab.GetComponent<CollisionComponent>();
+            collisionComponent.OnEnter += AddCoin;
             coins = _coins;
             maxCoins = _maxCoins;
         }
@@ -72,18 +76,26 @@ namespace GamePlay.CoinsInUnits
                 coins--;
             }
         }
-        public void AddCoin()
+        public void AddCoin(Collider col)
         {
             coins++;
-            if(coins == 1)
+            col.gameObject.GetComponent<Coin>().Hide();
+            if (coins == 1)
             {
-                State = new CitizenState();
+                var citizen = new CitizenState(prefab, navMesh);
+                State = citizen;
+                connectionsBuildings.getConnectionsWorkShop().addUnits(citizen);
             }
         }
         public void OnUpdate()
         {
             if(coins <= maxCoins)
             FindTheWay(CheckIfThereIsAnyCoinClose());
+        }
+
+        public void Dispose()
+        {
+            collisionComponent.OnEnter -= AddCoin;
         }
     }
 }

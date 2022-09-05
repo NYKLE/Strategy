@@ -7,8 +7,10 @@ namespace GameInit.Job
 {
     public class NomandState : IJob
     {
-        public NomandState()
+        private GameObject prefab;
+        public NomandState(GameObject _prefab)
         {
+            prefab = _prefab;
             Enter();
         }
         public void Enter()
@@ -16,10 +18,15 @@ namespace GameInit.Job
             Debug.Log("First State");
         }
 
+        public Vector3 getPosition()
+        {
+            return prefab.transform.position;
+        }
 
-
-
-
+        public void setWay(Vector3 way)
+        {
+            
+        }
     }
 }
 

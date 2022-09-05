@@ -9,6 +9,7 @@ using System;
 using GameInit.Job;
 using GameInit.GameCycleModule;
 using GameInit.Pool;
+using GameInit.ConnectBuildings;
 
 namespace GamePlay.SpawnUnits
 {
@@ -19,8 +20,10 @@ namespace GamePlay.SpawnUnits
         private List<IDisposable> dispose;
         private GameCycle cyrcle;
         private Pools CoinPool;
-        public UnitsSpawner(UnitsSettingsComponent _unitsSettingsComponent, NomandCampCreater _nomandCampCreater, List<IDisposable> _dispose, GameCycle _cyrcle, Pools _CoinPool)
+        ConnectionsBuildings connectionsBuildings;
+        public UnitsSpawner(UnitsSettingsComponent _unitsSettingsComponent, NomandCampCreater _nomandCampCreater, List<IDisposable> _dispose, GameCycle _cyrcle, Pools _CoinPool, ConnectionsBuildings _connectionsBuildings)
         {
+            connectionsBuildings = _connectionsBuildings;
             CoinPool = _CoinPool;
             cyrcle = _cyrcle;
             dispose = _dispose;
@@ -35,9 +38,8 @@ namespace GamePlay.SpawnUnits
             {
                 for (int i = 0; i < camp.GetMaxCount(); i++)
                 {
-                    var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool);
+                    var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool, dispose, connectionsBuildings);
                     camp.AddCount();
-                    dispose.Add(AI);
                 }
             }
         }
@@ -50,9 +52,8 @@ namespace GamePlay.SpawnUnits
                 {
                     if (camp.CanAdd())
                     {
-                        var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool);
+                        var AI = new UnitsAI(MonoBehaviour.Instantiate(unitsSettingsComponent.GetPrefab(), camp.GetTransform(), Quaternion.identity), camp, cyrcle, CoinPool, dispose, connectionsBuildings);
                         camp.AddCount();
-                        dispose.Add(AI);
                     }
                 }
             }
