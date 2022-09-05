@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using GameInit.Pool;
 using System;
@@ -49,9 +47,9 @@ namespace GamePlay.CoinsInUnits
                     coin.transform.position.z - prefab.transform.position.z);
 
                     double distance = Math.Sqrt(
-                    Math.Pow(difference.x, 2d) +
-                    Math.Pow(difference.y, 2d) +
-                    Math.Pow(difference.z, 2d));
+                        difference.x * 2 +
+                        difference.y * 2 +
+                        difference.z * 2);
 
                     if (distance < 12d)
                     {
@@ -59,7 +57,7 @@ namespace GamePlay.CoinsInUnits
                     }
                 }
             }
-           return null;
+            return null;
         }
 
         private void FindTheWay(GameObject coin)

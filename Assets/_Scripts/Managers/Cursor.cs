@@ -15,31 +15,7 @@ public class Cursor : MonoBehaviour
 
     private void Update()
     {
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit))
-            {
-                if (_raycastHit.transform.TryGetComponent(out ISelectable selectable))
-                {
-                    //curUnit = selectable;
-                    selectable.OnSelect();
-                }
-                else if ((!_raycastHit.transform.TryGetComponent(out ISelectable _selectable)) && _selectedUnit != null)
-                {
-                    _selectedUnit = null;
-                }
-            }
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit) && _selectedUnit != null)
-            {
-                _selectedUnit.MoveToPos(_raycastHit);
-            }
-        }*/
-
-
-
+        // LMB
         if (Input.GetMouseButtonDown(0))
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit, Mathf.Infinity, _raycastLayerMask, QueryTriggerInteraction.Ignore) && !EventSystem.current.IsPointerOverGameObject())
@@ -65,11 +41,13 @@ public class Cursor : MonoBehaviour
             }
         }
 
+        // LMB
         if (Input.GetMouseButtonUp(0))
         {
             _isDraggingMouseBox = false;
         }
 
+        // RMB
         if (Input.GetMouseButtonDown(1))
         {
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out _raycastHit, Mathf.Infinity, _raycastLayerMask, QueryTriggerInteraction.Ignore) && _selectedUnits.Count > 0)

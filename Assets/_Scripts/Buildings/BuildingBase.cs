@@ -30,11 +30,11 @@ public abstract class BuildingBase : MonoBehaviour
 
     public virtual void OnEnable()
     {
-        Managers.instance.BuildingsManager.AddBuilding(this);
+        //Managers.instance.BuildingsManager.AddBuilding(this);
     }
 
     public virtual void OnDisable()
     {
-        Managers.instance.BuildingsManager.RemoveBuilding(this);
+        //Managers.instance.BuildingsManager.RemoveBuilding(this);
     }
 }

@@ -25,17 +25,21 @@ public class TimeManager : MonoBehaviour
                 {
                     case 1:
                         Events.Time.onMorning?.Invoke();
+                        Debug.Log("Morning");
                         break;
                     case 2:
                         Events.Time.onMidday?.Invoke();
+                        Debug.Log("Midday");
                         break;
                     case 3:
                         Events.Time.onEvening?.Invoke();
+                        Debug.Log("Evening");
                         break;
                     case 4:
                         Days++;
                         _quaterCount = 0;
                         Events.Time.onNight?.Invoke();
+                        Debug.Log("Night");
                         break;
                     default:
                         throw new Exception($"No such time of day", null);
