@@ -1,0 +1,5 @@
+newmtl M_Grass
+map_Kd T_Grass_01.png
+Kd 1 1 1
+d 1
+
