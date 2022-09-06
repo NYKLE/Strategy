@@ -1,17 +1,17 @@
 using GameInit.Chest;
-using GameInit.GameCycleModule;
+using GameInit.GameCyrcleModule;
 using UnityEngine;
 
 namespace GameInit.Builders
 {
     public class ChestBuilder
     {
-        private GameCycle _cycle;
+        private GameCyrcle _cycle;
         private HeroComponent _heroComponent;
         private ResourceManager _resourceManager;
         private ChestComponent[] _chestSettings;
 
-        public ChestBuilder(GameCycle cycle, HeroComponent heroComponent, ResourceManager resourceManager)
+        public ChestBuilder(GameCyrcle cycle, HeroComponent heroComponent, ResourceManager resourceManager)
         {
             _cycle = cycle;
             _heroComponent = heroComponent;

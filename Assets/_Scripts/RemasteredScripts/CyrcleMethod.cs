@@ -1,6 +1,6 @@
 namespace GameInit.GameCyrcleModule
 {
-    public enum CyrcleMethod
+    public enum CycleMethod
 {
     NoType = 0,
     Update = 10,

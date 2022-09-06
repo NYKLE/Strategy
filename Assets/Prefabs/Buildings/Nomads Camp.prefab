@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6729712010392356533}
   - component: {fileID: 6729712010392356534}
   - component: {fileID: 6729712010392356528}
-  - component: {fileID: 2188707008290353307}
+  - component: {fileID: 642164598226208111}
   m_Layer: 0
   m_Name: Nomads Camp
   m_TagString: Untagged
@@ -11689,7 +11689,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 15
   m_Center: {x: 0.2500062, y: 0.250005, z: 0.0000009536743}
---- !u!114 &2188707008290353307
+--- !u!114 &642164598226208111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11698,7 +11698,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6729712010392356520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbeb32fdbd253294e92a7e475c28e238, type: 3}
+  m_Script: {fileID: 11500000, guid: f45b56655a6b2ba489b07f5b09ed3152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxCount: 5

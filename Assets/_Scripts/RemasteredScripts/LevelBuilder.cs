@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using GameInit.GameCycleModule;
+using GameInit.GameCyrcleModule;
 using GameInit.Pool;
 using GameInit.PoolPrefabs;
-using GameInit.NomandCam;
+using GameInit.NomandCamp;
 using GameInit.UnitsBuilderCreater;
 using GameInit.ConnectBuildings;
 using GameInit.Utility;
@@ -12,7 +12,7 @@ using GameInit.Utility;
 namespace GameInit.Builders
 {
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(GameCycle))]
+    [RequireComponent(typeof(GameCyrcle))]
 
     public class LevelBuilder : MonoBehaviour
     {
@@ -20,39 +20,28 @@ namespace GameInit.Builders
 
         private void Awake()
         {
-            var gameCycle = GetComponent<GameCycle>();
-            var prefabHolder = FindObjectOfType<PrefabPoolHolder>(); 
+            var GameCyrcle = GetComponent<GameCyrcle>();
+            var prefabHolder = FindObjectOfType<PrefabPoolHolderComponent>(); 
 
-            Builders(gameCycle, prefabHolder);
+            Builders(GameCyrcle, prefabHolder);
         }
 
-        private void Builders(GameCycle gameCyrcle, PrefabPoolHolder prefabHolder)
+        private void Builders(GameCyrcle gameCyrcle, PrefabPoolHolderComponent prefabHolder)
         {
-            Pools _CoinPool = new Pools(prefabHolder.GetCoinPrefab());
-            Pools _NomandPool = new Pools(prefabHolder.GetNomandPrefab());
-            Pools _citizenPool = new Pools(prefabHolder.GetCitizenPrefab());
-
-            //SpawnBuildingRegistration _spawnBuildingRegistration = new SpawnBuildingRegistration(gameCyrcle);
+            Pools _coinPool = new Pools(prefabHolder.GetCoinPrefab());
+            
             ConnectionsBuildings connectionsBuildings = new ConnectionsBuildings(_dispose);
 
-            NomandCampCreater nomandCampCreater = new NomandCampCreater();
-            UnitsBuilder UnitsBuilder = new UnitsBuilder(gameCyrcle, nomandCampCreater, _dispose, _CoinPool, connectionsBuildings);
-            BuildingsBuilder buildingsBuilder = new BuildingsBuilder(gameCyrcle, connectionsBuildings);
-            BuildingBuilder _buildingBuilder = new BuildingBuilder(gameCyrcle);
-
+            NomandCamppCreater NomandCamppCreater = new NomandCamppCreater();
+            UnitsBuilder UnitsBuilder = new UnitsBuilder(gameCyrcle, NomandCamppCreater, _dispose, _coinPool, connectionsBuildings);
+            new BuildingsBuilder(gameCyrcle, connectionsBuildings);
+            
             CameraBuilder _cameraBuilder = new CameraBuilder(gameCyrcle);
-            ResourcesUIBuilder _resourcesUIBuilder = new ResourcesUIBuilder();
-            ResourceManager _resourceManager = new ResourceManager(_resourcesUIBuilder);
+            ResourceManager _resourceManager = new ResourceManager();
             DayCycleBuilder _dayCycle = new DayCycleBuilder(gameCyrcle);
 
-            HeroBuilder _heroBuilder = new HeroBuilder(gameCyrcle, _CoinPool, _resourceManager);
-            ConstructionBuilder _constructionBuilder = new ConstructionBuilder(gameCyrcle, _CoinPool);
-            //FarmsBuilder farmsBuilder = new FarmsBuilder(gameCyrcle, _dayCycle.DayCycle);
-            NomadsCampBuilder _nomadsCampBuilder = new NomadsCampBuilder(gameCyrcle, _citizenPool);
-            CitizensBuilder _citizensBuilder = new CitizensBuilder(gameCyrcle, _citizenPool);
-
-            ToolsBuilder toolsBuilder = new ToolsBuilder(gameCyrcle, _citizenPool);
-
+            HeroBuilder _heroBuilder = new HeroBuilder(gameCyrcle, _coinPool, _resourceManager);
+            
             ChestBuilder _chestBuilder = new ChestBuilder(gameCyrcle, _heroBuilder.GetHeroSettings(), _resourceManager);
 
             Hacks(_resourceManager);

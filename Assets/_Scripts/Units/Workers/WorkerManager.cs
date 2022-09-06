@@ -67,7 +67,7 @@ public class WorkerManager : MonoBehaviour
 
         foreach (var worker in _workers)
         {
-            if (worker.GetState() == WorkerState.Walking)
+            if (worker.Getstate() == Workerstate.Walking)
             {
                 _walkingWorkers.Add(worker);
             }
@@ -82,7 +82,7 @@ public class WorkerManager : MonoBehaviour
 
         foreach (var worker in _workers)
         {
-            if (worker.GetState() == WorkerState.Free)
+            if (worker.Getstate() == Workerstate.Free)
             {
                 _freeWorkers.Add(worker);
             }
