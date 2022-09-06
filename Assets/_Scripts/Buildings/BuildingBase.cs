@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class BuildingBase : MonoBehaviour
 {
-    [field: SerializeField] public BuildingType Type { get; private set; }
-    [field: SerializeField] public BuildingState State { get; set; }
+    //[field: SerializeField] public BuildingType Type { get; private set; }
+    //[field: SerializeField] public BuildingState State { get; set; }
     [field: SerializeField] public int HealthMax { get; set; }
     [field: SerializeField] public int HealthCurrent { get; set; }
     [field: SerializeField] public int Level { get; set; } = 1;
@@ -19,13 +19,13 @@ public abstract class BuildingBase : MonoBehaviour
 
     public virtual void Upgrade()
     {
-        if (Level < 3 && State == BuildingState.Full)
-        {
-            Level++;
-            int newHealthMax = (int)(HealthMax * _multiplier);
-            HealthMax = newHealthMax;
-            HealthCurrent = newHealthMax;
-        }
+        // if (Level < 3 && State == BuildingState.Full)
+        // {
+        //     Level++;
+        //     int newHealthMax = (int)(HealthMax * _multiplier);
+        //     HealthMax = newHealthMax;
+        //     HealthCurrent = newHealthMax;
+        // }
     }
 
     public virtual void OnEnable()
