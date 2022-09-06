@@ -32,7 +32,7 @@ namespace BOYAREGames.Player
             if (!_RMBIsPressed) return;
 
             if (Physics.Raycast(
-                    Camera.main.ScreenPointToRay(Input.mousePosition),
+                    UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition),
                     out _raycastHit,
                     Mathf.Infinity,
                     _layerMask,

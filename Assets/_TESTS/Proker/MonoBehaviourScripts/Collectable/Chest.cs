@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BOYAREGames.Pickup
+namespace BOYAREGames.Collectable
 {
     public class Chest : MonoBehaviour
     {
