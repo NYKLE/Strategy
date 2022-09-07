@@ -22,10 +22,7 @@ namespace BOYAREGames.Collectable
         {
             if (IsDroppedByPlayer)
             {
-                if (_enableColliderCoroutine == null)
-                {
-                    _enableColliderCoroutine = StartCoroutine(EnableCollider(_untouchableDuration));
-                }
+                _enableColliderCoroutine ??= StartCoroutine(EnableCollider());
             }
         }
 
@@ -38,7 +35,7 @@ namespace BOYAREGames.Collectable
             }
         }
 
-        private IEnumerator EnableCollider(float waitTime)
+        private IEnumerator EnableCollider()
         {
             yield return _waitForUntouchableDuration;
 

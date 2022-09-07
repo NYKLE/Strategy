@@ -39,6 +39,7 @@ namespace BOYAREGames.Camps
                     if (nomad.IsFree)
                     {
                         nomad.GoToDestination(coin.transform.position);
+                        nomad.IsFree = false;
                         return;
                     }
                 }
@@ -54,6 +55,21 @@ namespace BOYAREGames.Camps
             {
                 _nomads.Add(nomad);
             }
+        }
+
+        private void OnEnable()
+        {
+            Events.Events.Nomad.DestroyAction += DestroyAction;
+        }
+
+        private void OnDisable()
+        {
+            Events.Events.Nomad.DestroyAction -= DestroyAction;
+        }
+
+        private void DestroyAction(Units.Nomad nomad)
+        {
+            _nomads.Remove(nomad);
         }
 
         private void OnDrawGizmosSelected()

@@ -3,21 +3,21 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour
 {
-	[SerializeField] private int speed;
-	[SerializeField] private int dragSpeed;
-	[SerializeField] private int minHight;
-	[SerializeField] private int maxHight;
-	[SerializeField] private int scrollSpeed;
-	[SerializeField] private int panBorderThicknes;
-	[SerializeField] private Vector2 limitPan;
-	[SerializeField] private Camera cameraMain;
+	[SerializeField] private int _speed;
+	[SerializeField] private int _dragSpeed;
+	[SerializeField] private int _minHeight;
+	[SerializeField] private int _maxHeight;
+	[SerializeField] private int _scrollSpeed;
+	[SerializeField] private int _panBorderThickness;
+	[SerializeField] private Vector2 _panLimit;
+	[SerializeField] private Camera _cameraMain;
 
-	[SerializeField] private Vector3 originPos;
-	[SerializeField] private Vector3 offset;
+	[SerializeField] private Vector3 _originPos;
+	[SerializeField] private Vector3 _offset;
 
-	private Vector3 lastPos = Vector3.zero;
-	private int speedMultiplay = 100;
-	private bool drag = false;
+	private Vector3 _lastPos = Vector3.zero;
+	private int _speedMultiplay = 100;
+	private bool _drag = false;
 
 	private const int constY = 0;
     private void Update()
@@ -27,34 +27,34 @@ public class CameraControl : MonoBehaviour
 	}
     private void MoveController()
 	{
-        if (!drag)
+        if (!_drag)
         {
-			Vector3 pos = cameraMain.transform.position;
-			if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThicknes)
+			Vector3 pos = _cameraMain.transform.position;
+			if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - _panBorderThickness)
 			{
-				pos.z += speed * Time.deltaTime;
+				pos.z += _speed * Time.deltaTime;
 			}
-			if (Input.GetKey("s") || Input.mousePosition.y <= panBorderThicknes)
+			if (Input.GetKey("s") || Input.mousePosition.y <= _panBorderThickness)
 			{
-				pos.z -= speed * Time.deltaTime;
+				pos.z -= _speed * Time.deltaTime;
 			}
-			if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panBorderThicknes)
+			if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - _panBorderThickness)
 			{
-				pos.x += speed * Time.deltaTime;
+				pos.x += _speed * Time.deltaTime;
 			}
-			if (Input.GetKey("a") || Input.mousePosition.x <= panBorderThicknes)
+			if (Input.GetKey("a") || Input.mousePosition.x <= _panBorderThickness)
 			{
-				pos.x -= speed * Time.deltaTime;
+				pos.x -= _speed * Time.deltaTime;
 			}
 
 			float scroll = Input.GetAxis("Mouse ScrollWheel");
-			pos.y -= scroll * scrollSpeed * speedMultiplay * Time.deltaTime;
+			pos.y -= scroll * _scrollSpeed * _speedMultiplay * Time.deltaTime;
 
-			pos.x = Mathf.Clamp(pos.x, -limitPan.x, limitPan.x);
-			pos.y = Mathf.Clamp(pos.y, minHight, maxHight);
-			pos.z = Mathf.Clamp(pos.z, -limitPan.y, limitPan.y);
+			pos.x = Mathf.Clamp(pos.x, -_panLimit.x, _panLimit.x);
+			pos.y = Mathf.Clamp(pos.y, _minHeight, _maxHeight);
+			pos.z = Mathf.Clamp(pos.z, -_panLimit.y, _panLimit.y);
 
-			cameraMain.transform.position = pos;
+			_cameraMain.transform.position = pos;
 		}
 	}
 	
@@ -63,20 +63,20 @@ public class CameraControl : MonoBehaviour
 		
 		if (Input.GetMouseButton(2))
         {
-			float h = dragSpeed * Input.GetAxis("Mouse X");
-			float v = dragSpeed * Input.GetAxis("Mouse Y");
-			lastPos = cameraMain.transform.position;
-			offset = new Vector3(h, constY, v);
-			drag = true;
+			float h = _dragSpeed * Input.GetAxis("Mouse X");
+			float v = _dragSpeed * Input.GetAxis("Mouse Y");
+			_lastPos = _cameraMain.transform.position;
+			_offset = new Vector3(h, constY, v);
+			_drag = true;
 		}
         else
         {
-			drag = false;
+			_drag = false;
         }
-        if (drag)
+        if (_drag)
         {
-			lastPos = Vector3.Lerp(lastPos, cameraMain.transform.position - offset, 0.5f);
-			cameraMain.transform.position = lastPos;
+			_lastPos = Vector3.Lerp(_lastPos, _cameraMain.transform.position - _offset, 0.5f);
+			_cameraMain.transform.position = _lastPos;
 		}
     }
 
