@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BOYAREGames.Units;
 using UnityEngine;
 
@@ -7,8 +8,12 @@ namespace BOYAREGames.Buildings
     {
         [field: SerializeField] public Transform GatheringPoint { get; private set; }
 
+        private List<Civilian> _civilians = new List<Civilian>();
+
         private void OnCivilianSpawn(Civilian civilian)
         {
+            _civilians.Add(civilian);
+
             civilian.GoToGatheringPoint(GatheringPoint.transform.position);
         }
 
