@@ -9,7 +9,6 @@ namespace BOYAREGames.Units
         public NavMeshAgent Agent { get; private set; }
         public Vector3 OriginalDestination { get; private set; }
 
-
         private void Awake()
         {
             Agent = GetComponent<NavMeshAgent>();

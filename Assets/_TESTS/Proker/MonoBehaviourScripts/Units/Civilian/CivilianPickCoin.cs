@@ -73,11 +73,6 @@ namespace BOYAREGames.Units
             _civilian.Agent.SetDestination(_civilian.OriginalDestination);
         }
 
-        private void OnValidate()
-        {
-            _sphereCollider.radius = _coinSightRadius;
-        }
-
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
