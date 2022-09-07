@@ -4880,6 +4880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4419314448099909397}
   - component: {fileID: 3477109730531026901}
+  - component: {fileID: -5076514760474265990}
   - component: {fileID: 4419314448099909398}
   - component: {fileID: 4419314448099909399}
   - component: {fileID: 4419314448099909384}
@@ -4921,6 +4922,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc782fd4c91033c459976b90b67529d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5076514760474265990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4419314448099909389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 580090955adc0414998f758f6f19849f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _coinSightRadius: 5
@@ -5751,7 +5764,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
