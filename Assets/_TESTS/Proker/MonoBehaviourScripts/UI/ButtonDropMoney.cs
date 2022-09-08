@@ -6,7 +6,7 @@ namespace BOYAREGames.UI
     {
         public void OnClick()
         {
-            Events.Events.Player.DropCoin?.Invoke();
+            Events.Events.Player.onDropCoinAction?.Invoke();
         }
     }
 }

@@ -59,12 +59,12 @@ namespace BOYAREGames.Camps
 
         private void OnEnable()
         {
-            Events.Events.Nomad.DestroyAction += DestroyAction;
+            Events.Events.Nomad.onDestroyAction += DestroyAction;
         }
 
         private void OnDisable()
         {
-            Events.Events.Nomad.DestroyAction -= DestroyAction;
+            Events.Events.Nomad.onDestroyAction -= DestroyAction;
         }
 
         private void DestroyAction(Units.Nomad nomad)

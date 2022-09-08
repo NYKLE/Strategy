@@ -29,12 +29,12 @@ namespace BOYAREGames.Player
 
         private void OnEnable()
         {
-            Events.Events.Player.DropCoin += DropCoin;
+            Events.Events.Player.onDropCoinAction += DropCoin;
         }
 
         private void OnDisable()
         {
-            Events.Events.Player.DropCoin -= DropCoin;
+            Events.Events.Player.onDropCoinAction -= DropCoin;
         }
     }
 }

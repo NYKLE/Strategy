@@ -35,6 +35,11 @@ namespace BOYAREGames.Collectable
             }
         }
 
+        private void OnDestroy()
+        {
+            Events.Events.Coin.onDestroyAction?.Invoke(this);
+        }
+
         private IEnumerator EnableCollider()
         {
             yield return _waitForUntouchableDuration;

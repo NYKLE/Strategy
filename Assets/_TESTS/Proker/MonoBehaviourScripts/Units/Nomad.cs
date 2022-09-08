@@ -82,7 +82,7 @@ namespace BOYAREGames.Units
             yield return _waitForDisappearDelay;
 
             GameObject go = Instantiate(_civilianPrefab, transform.position, Quaternion.identity);
-            Events.Events.Nomad.DestroyAction?.Invoke(this);
+            Events.Events.Nomad.onDestroyAction?.Invoke(this);
             Destroy(gameObject);
 
             _disappearCoroutine = null;

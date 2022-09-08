@@ -14,10 +14,10 @@ namespace BOYAREGames.Units
         private SphereCollider _sphereCollider;
         private Civilian _civilian;
         private Coroutine _goForCoinCoroutine;
+        private Collectable.Coin _coinToPickUp;
 
         private List<Collectable.Coin> _coinsInSight = new List<Collectable.Coin>();
         private int _coinPocketCurrent;
-        private bool _isGoingForCoin;
 
         private void Awake()
         {
@@ -48,29 +48,52 @@ namespace BOYAREGames.Units
                     {
                         _coinsInSight.Add(coin);
                     }
-
-                    Debug.Log($"Enter: {_coinsInSight.Count}");
                 }
             }
         }
 
         private IEnumerator GoForCoin(Collectable.Coin coin)
         {
-            _civilian.Agent.SetDestination(coin.transform.position);
+            _coinToPickUp = coin;
+            Vector3 coinPosition = coin.transform.position;
+            _civilian.Agent.SetDestination(coinPosition);
 
             while (_civilian.Agent.hasPath && 
-                   Vector3.Distance(transform.position, coin.transform.position) >= _civilian.Agent.stoppingDistance)
+                   Vector3.Distance(transform.position, coinPosition) >= _civilian.Agent.stoppingDistance)
             {
                 yield return null;
             }
 
-            _coinPocketCurrent++;
-            Destroy(coin.gameObject);
-            _coinsInSight.Clear();
+            if (_coinToPickUp != null)
+            {
+                _coinPocketCurrent++;
+                Destroy(coin.gameObject);
+                _coinsInSight.Clear();
+            }
 
+            _coinToPickUp = null;
             _goForCoinCoroutine = null;
 
             _civilian.Agent.SetDestination(_civilian.OriginalDestination);
+        }
+
+        private void OnEnable()
+        {
+            Events.Events.Coin.onDestroyAction += OnDestroyCoin;
+        }
+
+        private void OnDisable()
+        {
+            Events.Events.Coin.onDestroyAction -= OnDestroyCoin;
+        }
+
+        private void OnDestroyCoin(Collectable.Coin coin)
+        {
+            if (_coinsInSight.Contains(coin))
+            {
+                _coinToPickUp = null;
+                _coinsInSight.Clear();
+            }
         }
 
         private void OnDrawGizmosSelected()

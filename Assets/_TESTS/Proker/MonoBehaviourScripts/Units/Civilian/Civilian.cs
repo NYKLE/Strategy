@@ -16,7 +16,7 @@ namespace BOYAREGames.Units
 
         private void Start()
         {
-            Events.Events.Civilian.Spawn?.Invoke(this);
+            Events.Events.Civilian.onSpawnAction?.Invoke(this);
         }
 
         public void SetDestination(Vector3 destination)

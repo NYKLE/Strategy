@@ -19,12 +19,12 @@ namespace BOYAREGames.Buildings
 
         private void OnEnable()
         {
-            Events.Events.Civilian.Spawn += OnCivilianSpawn;
+            Events.Events.Civilian.onSpawnAction += OnCivilianSpawn;
         }
 
         private void OnDisable()
         {
-            Events.Events.Civilian.Spawn -= OnCivilianSpawn;
+            Events.Events.Civilian.onSpawnAction -= OnCivilianSpawn;
         }
     }
 }

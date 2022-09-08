@@ -20649,7 +20649,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-51074
+  m_Name: pb_Mesh32624
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21499,7 +21499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88ad2b551580bf64daa84b99a4644899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingPrefab: {fileID: 982190622413405344, guid: 5143688bbfbcf1245bae48d48ca7d268, type: 3}
+  _buildingPrefab: {fileID: 3392188533059082873, guid: c1471d178fa8d57439cb581390c9b7dc, type: 3}
   _costToBuild: 2
   _timeToBuild: 5
 --- !u!4 &1482896629
