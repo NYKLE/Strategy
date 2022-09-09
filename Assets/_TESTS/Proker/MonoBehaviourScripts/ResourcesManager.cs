@@ -25,6 +25,8 @@ namespace BOYAREGames.Resources
             }
 
             Add(ResourceType.Gold, 100);
+            Add(ResourceType.Stone, 10);
+            Add(ResourceType.Iron, 11);
         }
 
         public void Add(ResourceType type, int value)

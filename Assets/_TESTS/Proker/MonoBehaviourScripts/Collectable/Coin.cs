@@ -5,7 +5,7 @@ namespace BOYAREGames.Collectable
 {
     public class Coin : MonoBehaviour
     {
-        public bool IsDroppedByPlayer = false;
+        public bool IsDroppedByPlayer;
         [SerializeField] private float _untouchableDuration = 3f;
 
         private Coroutine _enableColliderCoroutine;

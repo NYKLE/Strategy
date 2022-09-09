@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace BOYAREGames.Units
 {
@@ -8,6 +11,7 @@ namespace BOYAREGames.Units
     [RequireComponent(typeof(SphereCollider))]
     public class CivilianPickCoin : MonoBehaviour
     {
+        [SerializeField] private GameObject _coinPrefab;
         [SerializeField] private float _coinSightRadius = 5f;
         [SerializeField] private int _coinPocketMax = 5;
 
@@ -35,6 +39,23 @@ namespace BOYAREGames.Units
             if (_coinsInSight.Count > 0)
             {
                 _goForCoinCoroutine ??= StartCoroutine(GoForCoin(_coinsInSight[0]));
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (_coinPocketCurrent > 0)
+            {
+                if (other.TryGetComponent(out Player.Player player))
+                {
+                    for (int i = 0; i < _coinPocketCurrent; i++)
+                    {
+                        GameObject go = Instantiate(_coinPrefab, transform.position, Quaternion.identity);
+                        Vector3 direction = player.transform.position - transform.position;
+                        direction.y += 1f;
+                        go.GetComponent<Rigidbody>().AddForce(direction, ForceMode.Impulse);
+                    }
+                }
             }
         }
 

@@ -4936,6 +4936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580090955adc0414998f758f6f19849f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coinPrefab: {fileID: 2435210624222720873, guid: db0eb89a4d876364e9ae889e60460207, type: 3}
   _coinSightRadius: 5
   _coinPocketMax: 5
 --- !u!114 &4419314448099909398
@@ -5745,7 +5746,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4419314448099909389}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.95, y: 2, z: 0.9}
@@ -5764,7 +5765,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 0.2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

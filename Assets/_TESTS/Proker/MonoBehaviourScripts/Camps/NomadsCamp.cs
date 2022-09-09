@@ -38,8 +38,7 @@ namespace BOYAREGames.Camps
                 {
                     if (nomad.IsFree)
                     {
-                        nomad.GoToDestination(coin.transform.position);
-                        nomad.IsFree = false;
+                        nomad.PickCoin.GoToCoin(coin);
                         return;
                     }
                 }

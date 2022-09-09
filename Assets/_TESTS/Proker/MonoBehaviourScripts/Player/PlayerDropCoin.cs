@@ -19,7 +19,7 @@ namespace BOYAREGames.Player
             if (Managers.instance.ResourcesManager.Get(Resources.ResourceType.Gold) > 0)
             {
                 Managers.instance.ResourcesManager.Add(Resources.ResourceType.Gold, -1);
-                var go = Instantiate(_coinPrefab, transform.position, Quaternion.identity);
+                var go = Instantiate(_coinPrefab, transform.position + transform.forward * 1f, Quaternion.identity);
                 if (go.TryGetComponent(out Collectable.Coin coin))
                 {
                     coin.IsDroppedByPlayer = true;
